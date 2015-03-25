@@ -38,7 +38,7 @@
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseApiService.cs" />
-    <Compile Include="BaseAuthentictedApiService.cs" />
+    <Compile Include="BaseAuthenticatedApiService.cs" />
     <Compile Include="Authorization\IUserCredentialService.cs" />
   </ItemGroup>
   <ItemGroup>
