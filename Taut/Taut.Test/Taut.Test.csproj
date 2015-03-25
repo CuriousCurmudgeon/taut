@@ -75,10 +75,17 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="BaseApiServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Taut\Taut.csproj">
+      <Project>{9cf85238-539b-4986-b8d0-ca8413afba91}</Project>
+      <Name>Taut</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
