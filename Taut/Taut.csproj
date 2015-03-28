@@ -34,12 +34,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Authorization\Authorization.cs" />
+    <Compile Include="Authorizations\Authorization.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseApiService.cs" />
     <Compile Include="BaseAuthenticatedApiService.cs" />
-    <Compile Include="Authorization\IUserCredentialService.cs" />
+    <Compile Include="Authorizations\IUserCredentialService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Flurl">
@@ -89,6 +89,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

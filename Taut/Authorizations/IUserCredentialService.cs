@@ -1,5 +1,5 @@
 ﻿
-namespace Taut.Authorization
+namespace Taut.Authorizations
 {
     public interface IUserCredentialService
     {

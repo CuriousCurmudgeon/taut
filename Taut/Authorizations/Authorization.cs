@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Taut.Authorization
+namespace Taut.Authorizations
 {
     public class Authorization
     {

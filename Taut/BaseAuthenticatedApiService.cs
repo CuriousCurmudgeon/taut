@@ -1,6 +1,6 @@
 ﻿using Flurl;
 using System;
-using Taut.Authorization;
+using Taut.Authorizations;
 
 namespace Taut
 {

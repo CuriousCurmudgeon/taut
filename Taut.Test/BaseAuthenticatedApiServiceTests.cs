@@ -1,13 +1,9 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Flurl;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Taut.Authorization;
 using SoftwareApproach.TestingExtensions;
-using Flurl;
+using System;
+using Taut.Authorizations;
 
 namespace Taut.Test
 {
@@ -68,7 +64,7 @@ namespace Taut.Test
             _userCredentialService.Setup(x => x.IsAuthorized)
                 .Returns(true);
             _userCredentialService.Setup(x => x.GetAuthorization())
-                .Returns(new Authorization.Authorization() { AccessToken = accessToken });
+                .Returns(new Authorization() { AccessToken = accessToken });
 
             // Act
             var url = act.Invoke(service);
