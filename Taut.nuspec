@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Taut</id>
+    <version>$version$</version>
+	<title>Taut</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <licenseUrl>https://raw.githubusercontent.com/CuriousCurmudgeon/taut/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/CuriousCurmudgeon/taut</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>
+		0.1.0 - Initial release to get NuGet package setup.
+	</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>slack Rx</tags>
+    <dependencies>
+		<group targetFramework="portable-net45+sl50+win+wpa81+wp80+MonoAndroid10+MonoTouch10">
+			<dependency id="Newtonsoft.Json" version="6.0.8" />
+			<dependency id="Flurl.Http" version="0.6.0" />
+		</group>
+	</dependencies>
+  </metadata>
+</package>

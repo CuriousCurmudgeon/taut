@@ -7,9 +7,9 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Taut")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("C# wrapper around the Slack API using Reactive Extensions. Taut is not created by, affiliated with, or supported by Slack Technologies, Inc.")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Brian Meeker")]
 [assembly: AssemblyProduct("Taut")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
