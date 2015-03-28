@@ -30,7 +30,7 @@ namespace Taut.Test
         #region BuildRequestUrl
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
-        public void GivenABaseApiService_WhenMethodIsNull_ThenBuildRequestUrlThrowsException()
+        public void GivenABaseApiService_WhenPathIsNull_ThenBuildRequestUrlThrowsException()
         {
             // Arrange
             var apiService = new StubApiService();
@@ -40,7 +40,7 @@ namespace Taut.Test
         }
 
         [TestMethod]
-        public void GivenABaseApiService_WhenMethodHasValue_ThenItIsAppendedToUrl()
+        public void GivenABaseApiService_WhenPathHasValue_ThenItIsAppendedToUrl()
         {
             // Arrange
             var apiService = new StubApiService();
