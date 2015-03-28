@@ -1,0 +1,37 @@
+﻿{
+    "ok": true,
+    "channel": {
+        "id": "C02QG5V77",
+        "name": "test",
+        "is_channel": true,
+        "created": 1413770260,
+        "creator": "U0257FX4E",
+        "is_archived": false,
+        "is_general": false,
+        "is_member": true,
+        "last_read": "1427075486.000024",
+        "latest": {
+            "type": "message",
+            "user": "U0257FX4E",
+            "text": "4704 steps taken today",
+            "ts": "1427075486.000024"
+        },
+        "unread_count": 0,
+        "unread_count_display": 0,
+        "members": [
+            "U0254DMM0",
+            "U0257FX4E",
+            "U029SH2KN"
+        ],
+        "topic": {
+            "value": "Mess around with hubot without annoying others.",
+            "creator": "U0257FX4E",
+            "last_set": 1413808232
+        },
+        "purpose": {
+            "value": "",
+            "creator": "",
+            "last_set": 0
+        }
+    }
+}
