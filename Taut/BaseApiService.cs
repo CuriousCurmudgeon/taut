@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Taut
 {
-    internal abstract class BaseApiService
+    public abstract class BaseApiService
     {
         public const string API_URL = "https://slack.com/api/";
 

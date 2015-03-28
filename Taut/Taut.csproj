@@ -35,7 +35,16 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Authorizations\Authorization.cs" />
+    <Compile Include="BaseResponse.cs" />
+    <Compile Include="Channels\Channel.cs" />
+    <Compile Include="Channels\ChannelInfoResponse.cs" />
+    <Compile Include="Channels\ChannelService.cs" />
+    <Compile Include="Channels\IChannelService.cs" />
+    <Compile Include="IAuthenticatedService.cs" />
+    <Compile Include="Messages\Message.cs" />
+    <Compile Include="Metadata\TextMetadata.cs" />
     <Compile Include="ObjectExtensions.cs" />
+    <Compile Include="Metadata\EditMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="BaseApiService.cs" />
     <Compile Include="BaseAuthenticatedApiService.cs" />

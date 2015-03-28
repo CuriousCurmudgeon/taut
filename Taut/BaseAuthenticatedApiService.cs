@@ -4,7 +4,7 @@ using Taut.Authorizations;
 
 namespace Taut
 {
-    internal abstract class BaseAuthenticatedApiService : BaseApiService
+    public abstract class BaseAuthenticatedApiService : BaseApiService
     {
         protected BaseAuthenticatedApiService(IUserCredentialService userCredentialService)
         {
