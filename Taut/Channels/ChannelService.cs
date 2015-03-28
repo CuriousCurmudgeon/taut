@@ -24,6 +24,8 @@ namespace Taut.Channels
 
         public IObservable<ChannelInfoResponse> Info(string channelId, CancellationToken cancellationToken)
         {
+            channelId.ThrowIfNull("channelId");
+
             return Observable.Create<ChannelInfoResponse>(async (observer) =>
             {
                 var requestUrl = BuildRequestUrl(INFO_METHOD, new { channel = channelId });

@@ -88,6 +88,7 @@
   <ItemGroup>
     <Compile Include="BaseApiServiceTests.cs" />
     <Compile Include="BaseAuthenticatedApiServiceTests.cs" />
+    <Compile Include="Channels\ChannelServiceTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
