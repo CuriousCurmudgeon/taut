@@ -25,8 +25,10 @@ namespace Taut
                 .SetQueryParams(queryParams);
         }
 
-        protected async Task<T> GetResponseAsync<T>(Url url) where T : new()
+        public async Task<T> GetResponseAsync<T>(Url url) where T : new()
         {
+            url.ThrowIfNull("url");
+
             var response = await url.GetAsync();
             var responseContent = (response.Content == null) ? null : await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseContent);
