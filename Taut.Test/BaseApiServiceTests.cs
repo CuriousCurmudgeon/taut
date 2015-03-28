@@ -1,13 +1,10 @@
-﻿using Flurl.Http.Testing;
+﻿using Flurl;
+using Flurl.Http.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using SoftwareApproach.TestingExtensions;
-using Flurl;
+using System;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Taut.Test
 {
@@ -32,8 +29,7 @@ namespace Taut.Test
 
         #region BuildRequestUrl
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void GivenABaseApiService_WhenMethodIsNull_ThenBuildRequestUrlThrowsException()
         {
             // Arrange
@@ -73,8 +69,7 @@ namespace Taut.Test
 
         #region GetResponseAsync
 
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public async Task GivenABaseApiService_WhenUrlIsNull_ThenGetResponseAsyncThrowsException()
         {
             // Arrange
