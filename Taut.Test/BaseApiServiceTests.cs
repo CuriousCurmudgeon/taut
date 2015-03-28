@@ -4,6 +4,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SoftwareApproach.TestingExtensions;
 using System;
 using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Taut.Test
@@ -76,7 +77,7 @@ namespace Taut.Test
             var apiService = new StubApiService();
 
             // Act
-            await apiService.GetResponseAsync<StubResponse>(null);
+            await apiService.GetResponseAsync<StubResponse>(null, CancellationToken.None);
         }
 
         [TestMethod]
@@ -87,7 +88,7 @@ namespace Taut.Test
             _httpTest.RespondWith(STUB_RESPONSE);
 
             // Act
-            var response = await apiService.GetResponseAsync<StubResponse>(new Url(BaseApiService.API_URL));
+            var response = await apiService.GetResponseAsync<StubResponse>(new Url(BaseApiService.API_URL), CancellationToken.None);
 
             // Assert
             response.Ok.ShouldBeTrue();
@@ -101,7 +102,7 @@ namespace Taut.Test
             _httpTest.RespondWith(STUB_RESPONSE);
 
             // Act
-            var response = await apiService.GetResponseAsync<StubResponse>(new Url(BaseApiService.API_URL));
+            var response = await apiService.GetResponseAsync<StubResponse>(new Url(BaseApiService.API_URL), CancellationToken.None);
 
             // Assert
             _httpTest.ShouldHaveCalled(BaseApiService.API_URL)

@@ -1,6 +1,7 @@
 ﻿using Flurl;
 using Flurl.Http;
 using Newtonsoft.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Taut
@@ -47,12 +48,13 @@ namespace Taut
         /// </summary>
         /// <typeparam name="T">Type to deserialize response to.</typeparam>
         /// <param name="url"></param>
+        /// <param name="cancellationToken"></param>
         /// <returns>Response content deserializd to T.</returns>
-        public async Task<T> GetResponseAsync<T>(Url url) where T : new()
+        public async Task<T> GetResponseAsync<T>(Url url, CancellationToken cancellationToken) where T : new()
         {
             url.ThrowIfNull("url");
 
-            var response = await url.GetAsync();
+            var response = await url.GetAsync(cancellationToken);
             var responseContent = (response.Content == null) ? null : await response.Content.ReadAsStringAsync();
             return JsonConvert.DeserializeObject<T>(responseContent);
         }

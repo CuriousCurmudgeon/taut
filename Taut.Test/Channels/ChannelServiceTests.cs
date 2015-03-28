@@ -46,16 +46,6 @@ namespace Taut.Test.Channels
             service.Info(null);
         }
 
-        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
-        public void WhenChannelIdIsNull_ThenInfoWithCancellationTokenThrowsException()
-        {
-            // Arrange
-            var service = BuildChannelService();
-
-            // Act
-            service.Info(null, CancellationToken.None);
-        }
-
         [TestMethod]
         public async Task WhenChannelIdHasValue_ThenInfoIncludesChannelIdInParams()
         {

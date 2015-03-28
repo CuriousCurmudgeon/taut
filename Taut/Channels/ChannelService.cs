@@ -19,17 +19,12 @@ namespace Taut.Channels
 
         public IObservable<ChannelInfoResponse> Info(string channelId)
         {
-            return Info(channelId, CancellationToken.None);
-        }
-
-        public IObservable<ChannelInfoResponse> Info(string channelId, CancellationToken cancellationToken)
-        {
             channelId.ThrowIfNull("channelId");
 
-            return Observable.Create<ChannelInfoResponse>(async (observer) =>
+            return Observable.Create<ChannelInfoResponse>(async (observer, cancellationToken) =>
             {
                 var requestUrl = BuildRequestUrl(INFO_METHOD, new { channel = channelId });
-                observer.OnNext(await GetResponseAsync<ChannelInfoResponse>(requestUrl));
+                observer.OnNext(await GetResponseAsync<ChannelInfoResponse>(requestUrl, cancellationToken));
                 observer.OnCompleted();
                 return Disposable.Empty;
             });

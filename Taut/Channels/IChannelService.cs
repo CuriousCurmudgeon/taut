@@ -12,6 +12,5 @@ namespace Taut.Channels
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         IObservable<ChannelInfoResponse> Info(string channelId);
-        IObservable<ChannelInfoResponse> Info(string channelId, CancellationToken cancellationToken);
     }
 }
