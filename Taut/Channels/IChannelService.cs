@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 
 namespace Taut.Channels
@@ -12,5 +13,12 @@ namespace Taut.Channels
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         IObservable<ChannelInfoResponse> Info(string channelId);
+
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.list">Documentation</a>.
+        /// </summary>
+        /// <param name="excludeArchived">Should archived channels be returned?</param>
+        /// <returns></returns>
+        IObservable<ChannelListResponse> List(bool excludeArchived = false);
     }
 }

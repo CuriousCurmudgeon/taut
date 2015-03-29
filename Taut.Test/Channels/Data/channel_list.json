@@ -1,0 +1,53 @@
+﻿{
+    "ok": true,
+    "channels": [
+        {
+            "id": "C02QG5V77",
+            "name": "test",
+            "is_channel": true,
+            "created": 1413770260,
+            "creator": "U0257FX4E",
+            "is_archived": false,
+            "is_general": false,
+            "is_member": true,
+            "members": [
+                "U0254DMM0",
+                "U0257FX4E",
+                "U029SH2KN"
+            ],
+            "topic": {
+                "value": "Mess around with hubot without annoying others.",
+                "creator": "U0257FX4E",
+                "last_set": 1413808232
+            },
+            "purpose": {
+                "value": "",
+                "creator": "",
+                "last_set": 0
+            },
+            "num_members": 3
+        },
+        {
+            "id": "C02546KS3",
+            "name": "twitter",
+            "is_channel": true,
+            "created": 1392312301,
+            "creator": "U0254DMM0",
+            "is_archived": true,
+            "is_general": false,
+            "is_member": false,
+            "members": [],
+            "topic": {
+                "value": "",
+                "creator": "",
+                "last_set": 0
+            },
+            "purpose": {
+                "value": "",
+                "creator": "",
+                "last_set": 0
+            },
+            "num_members": 0
+        }
+    ]
+}

@@ -15,8 +15,8 @@ namespace Taut.Test.Channels
     [TestClass]
     public class ChannelServiceTests 
     {
-        private const string CHANNEL_INFO_RESPONSE = "{\"ok\":true}";
         private static ChannelInfoResponse OkChannelInfoResponse;
+        private static ChannelListResponse OkChannelListResponse;
 
         private HttpTest _httpTest;
         private Mock<IUserCredentialService> _userCredentialService;
@@ -25,6 +25,7 @@ namespace Taut.Test.Channels
         public static void ClassInitialize(TestContext context)
         {
             OkChannelInfoResponse = JsonLoader.LoadJson<ChannelInfoResponse>(@"Channels/Data/channel_info.json");
+            OkChannelListResponse = JsonLoader.LoadJson<ChannelListResponse>(@"Channels/Data/channel_list.json");
         }
 
         [TestInitialize]
@@ -49,34 +50,56 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenChannelIdHasValue_ThenInfoIncludesChannelIdInParams()
         {
+            await ApiCallTestHelperAsync(OkChannelInfoResponse,
+                async service => await service.Info("123").ToTask(),
+                "*channels.info*channel=123");
+        }
+
+        #endregion
+
+        #region List
+
+        [TestMethod]
+        public async Task WhenExcludeArchivedIsDefault_ThenListParamsSetExcludeArchivedTo0()
+        {
+            await ApiCallTestHelperAsync(OkChannelListResponse,
+                async service => await service.List().ToTask(),
+                "*channels.list*exclude_archived=0");
+        }
+
+        [TestMethod]
+        public async Task WhenExcludeArchivedIsFalse_ThenListParamsSetExcludeArchivedTo0()
+        {
+            await ApiCallTestHelperAsync(OkChannelListResponse,
+                async service => await service.List(excludeArchived: false).ToTask(),
+                "*channels.list*exclude_archived=0");
+        }
+
+        [TestMethod]
+        public async Task WhenExcludeArchivedIsTrue_ThenListParamsSetExcludeArchivedTo1()
+        {
+            await ApiCallTestHelperAsync(OkChannelListResponse,
+                async service => await service.List(excludeArchived: true).ToTask(),
+                "*channels.list*exclude_archived=1");
+        }
+
+        private async Task ApiCallTestHelperAsync<T>(T response, Func<IChannelService, Task<T>> action,
+            string shouldHaveCalled)
+        {
             // Arrange
             var service = BuildChannelService();
-            _httpTest.RespondWithJson(OkChannelInfoResponse);
+            _httpTest.RespondWithJson(response);
             SetAuthorizedUserExpectations();
 
             // Act
-            var infoObserver = await service.Info("123").ToTask();
+            var result = await action.Invoke(service);
 
             // Assert
-            _httpTest.ShouldHaveCalled("*channels.info*channel=123")
+            _httpTest.ShouldHaveCalled(shouldHaveCalled)
                 .WithVerb(HttpMethod.Get)
                 .Times(1);
         }
 
-        [TestMethod]
-        public async Task WhenResponseIsOk_ThenResponseIncludesChannel()
-        {
-            // Arrange
-            var service = BuildChannelService();
-            _httpTest.RespondWithJson(OkChannelInfoResponse);
-            SetAuthorizedUserExpectations();
-
-            // Act
-            var infoObserver = await service.Info("123").ToTask();
-
-            // Assert
-            infoObserver.Channel.ShouldNotBeNull();
-        }
 
         #endregion
 
