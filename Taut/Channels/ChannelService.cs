@@ -22,25 +22,24 @@ namespace Taut.Channels
         {
             channelId.ThrowIfNull("channelId");
 
-            return Observable.Create<ChannelInfoResponse>(async (observer, cancellationToken) =>
-            {
-                var requestUrl = BuildRequestUrl(INFO_METHOD, new { channel = channelId });
-                observer.OnNext(await GetResponseAsync<ChannelInfoResponse>(requestUrl, cancellationToken));
-                observer.OnCompleted();
-                return Disposable.Empty;
-            });
+            return ApiCallHelper(INFO_METHOD,
+                    new { channel = channelId },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelInfoResponse>(requestUrl, cancellationToken));
         }
 
         public IObservable<ChannelListResponse> List(bool excludeArchived = false)
         {
-            return Observable.Create<ChannelListResponse>(async (observer, cancellationToken) =>
+            return ApiCallHelper(LIST_METHOD,
+                    new { exclude_archived = Convert.ToInt32(excludeArchived) },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelListResponse>(requestUrl, cancellationToken));
+        }
+
+        private IObservable<T> ApiCallHelper<T>(string method, object queryParams, Func<string, CancellationToken, Task<T>> httpCall)
+        {
+            return Observable.Create<T>(async (observer, cancellationToken) =>
             {
-                var requestUrl = BuildRequestUrl(LIST_METHOD,
-                    new
-                    {
-                        exclude_archived = Convert.ToInt32(excludeArchived),
-                    });
-                observer.OnNext(await GetResponseAsync<ChannelListResponse>(requestUrl, cancellationToken));
+                var requestUrl = BuildRequestUrl(method, queryParams);
+                observer.OnNext(await httpCall.Invoke(requestUrl, cancellationToken));
                 observer.OnCompleted();
                 return Disposable.Empty;
             });
