@@ -12,8 +12,10 @@ namespace Taut.Test
     [TestClass]
     public class BaseApiServiceTests
     {
-        private const string STUB_RESPONSE = "{\"ok\":true}";
+        private const string STUB_OK_RESPONSE = "{\"ok\":true}";
+        private const string STUB_ERROR_RESPONSE = "{\"ok\":false, \"error\":\"channel_not_found\"}";
 
+        private static Url ValidTestUrl = new Url(BaseApiService.API_URL);
         private HttpTest _httpTest;
 
         [TestInitialize]
@@ -85,10 +87,10 @@ namespace Taut.Test
         {
             // Arrange
             var apiService = new StubApiService();
-            _httpTest.RespondWith(STUB_RESPONSE);
+            _httpTest.RespondWith(STUB_OK_RESPONSE);
 
             // Act
-            var response = await apiService.GetResponseAsync<StubResponse>(new Url(BaseApiService.API_URL), CancellationToken.None);
+            var response = await apiService.GetResponseAsync<StubResponse>(ValidTestUrl, CancellationToken.None);
 
             // Assert
             response.Ok.ShouldBeTrue();
@@ -99,10 +101,10 @@ namespace Taut.Test
         {
             // Arrange
             var apiService = new StubApiService();
-            _httpTest.RespondWith(STUB_RESPONSE);
+            _httpTest.RespondWith(STUB_OK_RESPONSE);
 
             // Act
-            var response = await apiService.GetResponseAsync<StubResponse>(new Url(BaseApiService.API_URL), CancellationToken.None);
+            var response = await apiService.GetResponseAsync<StubResponse>(ValidTestUrl, CancellationToken.None);
 
             // Assert
             _httpTest.ShouldHaveCalled(BaseApiService.API_URL)
@@ -110,13 +112,43 @@ namespace Taut.Test
                 .Times(1);
         }
 
+        [TestMethod, ExpectedException(typeof(SlackApiException))]
+        public async Task GivenABaseApiService_WhenGetResponseAsyncIsNotOk_ThenSlackApiExceptionIsThrown()
+        {
+            // Arrange
+            var apiService = new StubApiService();
+            _httpTest.RespondWith(STUB_ERROR_RESPONSE);
+
+            // Act
+            var response = await apiService.GetResponseAsync<StubResponse>(ValidTestUrl, CancellationToken.None);
+        }
+
+        [TestMethod]
+        public async Task GivenABaseApiService_WhenGetResponseAsyncIsNotOk_ThenSlackApiExceptionHasErrorSet()
+        {
+            // Arrange
+            var apiService = new StubApiService();
+            _httpTest.RespondWith(STUB_ERROR_RESPONSE);
+
+            SlackApiException exception = null;
+            try
+            {
+                // Act
+                var response = await apiService.GetResponseAsync<StubResponse>(ValidTestUrl, CancellationToken.None);
+            }
+            catch (SlackApiException ex)
+            {
+                exception = ex;
+            }
+
+            // Assert
+            exception.Error.ShouldEqual("channel_not_found");
+        }
+
         #endregion
     }
 
     internal class StubApiService : BaseApiService {}
 
-    internal class StubResponse
-    {
-        public bool Ok { get; set; }
-    }
+    internal class StubResponse : BaseResponse {}
 }

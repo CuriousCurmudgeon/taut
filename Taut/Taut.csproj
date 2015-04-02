@@ -51,6 +51,7 @@
     <Compile Include="BaseApiService.cs" />
     <Compile Include="BaseAuthenticatedApiService.cs" />
     <Compile Include="Authorizations\IUserCredentialService.cs" />
+    <Compile Include="SlackApiException.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Flurl">

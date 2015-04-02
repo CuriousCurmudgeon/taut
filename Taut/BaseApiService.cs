@@ -50,13 +50,18 @@ namespace Taut
         /// <param name="url"></param>
         /// <param name="cancellationToken"></param>
         /// <returns>Response content deserializd to T.</returns>
-        public async Task<T> GetResponseAsync<T>(Url url, CancellationToken cancellationToken) where T : new()
+        public async Task<T> GetResponseAsync<T>(Url url, CancellationToken cancellationToken) where T : BaseResponse
         {
             url.ThrowIfNull("url");
 
             var response = await url.GetAsync(cancellationToken);
             var responseContent = (response.Content == null) ? null : await response.Content.ReadAsStringAsync();
-            return JsonConvert.DeserializeObject<T>(responseContent);
+            var result = JsonConvert.DeserializeObject<T>(responseContent);
+            if (!result.Ok)
+            {
+                throw new SlackApiException(result.Error);
+            }
+            return result;
         }
     }
 }
