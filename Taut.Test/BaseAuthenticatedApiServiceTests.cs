@@ -63,7 +63,7 @@ namespace Taut.Test
             var service = new StubAuthenticatedApiService(_userCredentialService.Object);
             _userCredentialService.Setup(x => x.IsAuthorized)
                 .Returns(true);
-            _userCredentialService.Setup(x => x.GetAuthorization())
+            _userCredentialService.SetupGet(x => x.Authorization)
                 .Returns(new Authorization() { AccessToken = accessToken });
 
             // Act

@@ -1,6 +1,9 @@
 ﻿
 namespace Taut.Authorizations
 {
+    /// <summary>
+    /// Manage the authorized user. Only one user can be authorized at a time.
+    /// </summary>
     public interface IUserCredentialService
     {
         /// <summary>
@@ -12,17 +15,6 @@ namespace Taut.Authorizations
         /// Get the authorized user.
         /// </summary>
         /// <returns>Null if no user is authorized. Otherwise, the authorized user.</returns>
-        Authorization GetAuthorization();
-
-        /// <summary>
-        /// Add an authorized user.
-        /// </summary>
-        /// <param name="authorization">The authorization to add.</param>
-        void AddAuthorization(Authorization authorization);
-
-        /// <summary>
-        /// Clear the authorized user.
-        /// </summary>
-        void ClearAuthorization();
+        Authorization Authorization { get; set; }
     }
 }

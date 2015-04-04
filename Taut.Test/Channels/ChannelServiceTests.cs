@@ -114,7 +114,7 @@ namespace Taut.Test.Channels
         {
             _userCredentialService.Setup(x => x.IsAuthorized)
                 .Returns(true);
-            _userCredentialService.Setup(x => x.GetAuthorization())
+            _userCredentialService.SetupGet(x => x.Authorization)
                 .Returns(new Authorization() { AccessToken = accessToken });
         }
 

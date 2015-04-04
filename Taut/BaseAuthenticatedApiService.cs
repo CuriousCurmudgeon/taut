@@ -19,7 +19,7 @@ namespace Taut
             {
                 throw new UserNotAuthenticatedException();
             }
-            var accessToken = UserCredentialService.GetAuthorization().AccessToken;
+            var accessToken = UserCredentialService.Authorization.AccessToken;
             return base.BuildRequestUrl(path, queryParams)
                 .SetQueryParam("token", accessToken);
         }
