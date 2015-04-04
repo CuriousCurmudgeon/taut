@@ -15,39 +15,47 @@ namespace Taut.WinRT.Test.Authorizations
         private const string DEFAULT_ACCESS_TOKEN = "123";
         private const string DEFAULT_SCOPE = "read";
 
+        private IUserCredentialService _service;
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            _service = new UserCredentialService();
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            _service.Authorization = null;
+        }
+
         #region IsAuthorized
 
         [TestMethod]
         public void GivenAUserCredentialService_WhenTheVaultIsEmpty_ThenIsAuthorizedReturnsFalse()
         {
-            // Arrange
-            var service = new UserCredentialService();
-
-            // Act/Assert
-            Assert.IsFalse(service.IsAuthorized);
+            Assert.IsFalse(_service.IsAuthorized);
         }
 
         [TestMethod]
         public void GivenAUserCredentialService_WhenAuthorizationIsSet_ThenIsAuthorizedReturnsTrue()
         {
             // Arrange
-            var service = new UserCredentialService();
-            service.Authorization = BuildAuthorization();
+            _service.Authorization = BuildAuthorization();
 
             // Act/Assert
-            Assert.IsTrue(service.IsAuthorized);
+            Assert.IsTrue(_service.IsAuthorized);
         }
 
         [TestMethod]
         public void GivenAUserCredentialService_WhenAuthorizationIsSetToNull_ThenIsAuthorizedReturnsFalse()
         {
             // Arrange
-            var service = new UserCredentialService();
-            service.Authorization = BuildAuthorization();
-            service.Authorization = null;
+            _service.Authorization = BuildAuthorization();
+            _service.Authorization = null;
 
             // Act/Assert
-            Assert.IsFalse(service.IsAuthorized);
+            Assert.IsFalse(_service.IsAuthorized);
         }
 
         #endregion
@@ -58,11 +66,10 @@ namespace Taut.WinRT.Test.Authorizations
         public void GivenAUserCredentialService_WhenAuthorizationIsSetToNull_ThenAuthorizationReturnsNull()
         {
             // Arrange
-            var service = new UserCredentialService();
-            service.Authorization = null;
+            _service.Authorization = null;
 
             // Act/Assert
-            var authorization = service.Authorization;
+            var authorization = _service.Authorization;
 
             // Assert
             Assert.IsNull(authorization);
@@ -73,11 +80,10 @@ namespace Taut.WinRT.Test.Authorizations
         {
             // Arrange
             var accessToken = "token";
-            var service = new UserCredentialService();
-            service.Authorization = BuildAuthorization(accessToken: accessToken);
+            _service.Authorization = BuildAuthorization(accessToken: accessToken);
 
             // Act/Assert
-            var authorization = service.Authorization;
+            var authorization = _service.Authorization;
 
             // Assert
             Assert.AreEqual(accessToken, authorization.AccessToken);
@@ -88,11 +94,10 @@ namespace Taut.WinRT.Test.Authorizations
         {
             // Arrange
             var scope = "read,write";
-            var service = new UserCredentialService();
-            service.Authorization = BuildAuthorization(scope: scope);
+            _service.Authorization = BuildAuthorization(scope: scope);
 
             // Act/Assert
-            var authorization = service.Authorization;
+            var authorization = _service.Authorization;
 
             // Assert
             Assert.AreEqual(scope, authorization.Scope);
