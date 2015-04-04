@@ -1,4 +1,5 @@
 ﻿using Flurl;
+using Flurl.Http;
 using Flurl.Http.Testing;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SoftwareApproach.TestingExtensions;
@@ -143,6 +144,23 @@ namespace Taut.Test
 
             // Assert
             exception.Error.ShouldEqual("channel_not_found");
+        }
+
+        /// <summary>
+        /// This test only exists to document that we are using the built-in Flurl error handling.
+        /// It's possible that we could have special handling for some exceptions, but I'm not
+        /// sure what that should be yet.
+        /// </summary>
+        /// <returns></returns>
+        [TestMethod, ExpectedException(typeof(FlurlHttpException))]
+        public async Task GivenABaseApiService_WhenGetResponseAsyncReturns404Error_ThenFlurlHttpExceptionThrown()
+        {
+            // Arrange
+            var apiService = new StubApiService();
+            _httpTest.RespondWith(404, string.Empty);
+
+            // Act
+            var response = await apiService.GetResponseAsync<StubResponse>(ValidTestUrl, CancellationToken.None);
         }
 
         #endregion
