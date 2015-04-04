@@ -42,6 +42,9 @@
     <Compile Include="Channels\ChannelListResponse.cs" />
     <Compile Include="Channels\ChannelService.cs" />
     <Compile Include="Channels\IChannelService.cs" />
+    <Compile Include="Chat\ChatPostMessageResponse.cs" />
+    <Compile Include="Chat\ChatService.cs" />
+    <Compile Include="Chat\IChatService.cs" />
     <Compile Include="IAuthenticatedService.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Metadata\TextMetadata.cs" />

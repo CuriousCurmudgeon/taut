@@ -88,9 +88,11 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="ApiServiceTestBase.cs" />
     <Compile Include="BaseApiServiceTests.cs" />
     <Compile Include="BaseAuthenticatedApiServiceTests.cs" />
     <Compile Include="Channels\ChannelServiceTests.cs" />
+    <Compile Include="Chat\ChatServiceTests.cs" />
     <Compile Include="JsonLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -1,6 +1,9 @@
 ﻿using Flurl;
 using Flurl.Http;
 using Newtonsoft.Json;
+using System;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -62,6 +65,17 @@ namespace Taut
                 throw new SlackApiException(result.Error);
             }
             return result;
+        }
+
+        protected IObservable<T> ObservableApiCall<T>(string method, object queryParams, Func<string, CancellationToken, Task<T>> httpCall)
+        {
+            return Observable.Create<T>(async (observer, cancellationToken) =>
+            {
+                var requestUrl = BuildRequestUrl(method, queryParams);
+                observer.OnNext(await httpCall.Invoke(requestUrl, cancellationToken));
+                observer.OnCompleted();
+                return Disposable.Empty;
+            });
         }
     }
 }

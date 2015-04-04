@@ -13,13 +13,10 @@ using Taut.Channels;
 namespace Taut.Test.Channels
 {
     [TestClass]
-    public class ChannelServiceTests 
+    public class ChannelServiceTests : ApiServiceTestBase
     {
         private static ChannelInfoResponse OkChannelInfoResponse;
         private static ChannelListResponse OkChannelListResponse;
-
-        private HttpTest _httpTest;
-        private Mock<IUserCredentialService> _userCredentialService;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
@@ -29,10 +26,9 @@ namespace Taut.Test.Channels
         }
 
         [TestInitialize]
-        public void Initialize()
+        public override void Initialize()
         {
-            _httpTest = new HttpTest();
-            _userCredentialService = new Mock<IUserCredentialService>(MockBehavior.Strict);
+            base.Initialize();
         }
 
         #region Info
@@ -88,14 +84,14 @@ namespace Taut.Test.Channels
         {
             // Arrange
             var service = BuildChannelService();
-            _httpTest.RespondWithJson(response);
+            HttpTest.RespondWithJson(response);
             SetAuthorizedUserExpectations();
 
             // Act
             var result = await action.Invoke(service);
 
             // Assert
-            _httpTest.ShouldHaveCalled(shouldHaveCalled)
+            HttpTest.ShouldHaveCalled(shouldHaveCalled)
                 .WithVerb(HttpMethod.Get)
                 .Times(1);
         }
@@ -107,14 +103,14 @@ namespace Taut.Test.Channels
 
         private ChannelService BuildChannelService()
         {
-            return new ChannelService(_userCredentialService.Object);
+            return new ChannelService(UserCredentialService.Object);
         }
 
         private void SetAuthorizedUserExpectations(string accessToken = "secret")
         {
-            _userCredentialService.Setup(x => x.IsAuthorized)
+            UserCredentialService.Setup(x => x.IsAuthorized)
                 .Returns(true);
-            _userCredentialService.SetupGet(x => x.Authorization)
+            UserCredentialService.SetupGet(x => x.Authorization)
                 .Returns(new Authorization() { AccessToken = accessToken });
         }
 
