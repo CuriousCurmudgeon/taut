@@ -12,6 +12,9 @@
         <description>C# wrapper around the Slack API using Reactive Extensions. Taut is not created by, affiliated with, or supported by Slack Technologies, Inc.</description>
         <copyright>Copyright ©  2015</copyright>
         <tags>slack Rx</tags>
+		<releaseNotes>
+			0.1.0 - Initial release to get NuGet package setup.
+		</releaseNotes>
         <dependencies>
             <dependency id="Flurl.Http" version="0.6.0" />
             <dependency id="Rx-Main" version="2.2.5" />

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Taut.WinRT</id>
+    <version>0.1.0-alpha</version>
+    <title>Taut.WinRT</title>
+    <authors>Brian Meeker</authors>
+    <owners>Brian Meeker</owners>
+    <licenseUrl>https://raw.githubusercontent.com/CuriousCurmudgeon/taut/master/LICENSE</licenseUrl>
+	<projectUrl>https://github.com/CuriousCurmudgeon/taut</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>C# wrapper around the Slack API using Reactive Extensions. Taut is not created by, affiliated with, or supported by Slack Technologies, Inc.</description>
+    <releaseNotes>
+		0.1.0 - Initial release to get NuGet package setup.
+	</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>slack Rx win81 wpa81 universal</tags>
+	<dependencies>
+		<dependency id="Taut" version="0.1.0" />
+	</dependencies>
+  </metadata>
+</package>
