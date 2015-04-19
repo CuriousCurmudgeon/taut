@@ -10,13 +10,21 @@ namespace Taut.Chat
         public ChatService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
 
-        public IObservable<ChatPostMessageResponse> PostMessage(string channelId, string text)
+        public IObservable<ChatPostMessageResponse> PostMessage(string channelId, string text,
+            string username = null, bool? asUser = null)
         {
             channelId.ThrowIfNull("channelId");
             text.ThrowIfNull("text");
 
-            return ObservableApiCall(POST_MESSAGE_METHOD,
-                    new { channel = channelId, text = text },
+            var queryParams = new
+            {
+                channel = channelId,
+                text = text,
+                username = username,
+                as_user = asUser.HasValue ? asUser.ToString().ToLower() : null,
+            };
+
+            return ObservableApiCall(POST_MESSAGE_METHOD, queryParams,
                     async (requestUrl, cancellationToken) => await GetResponseAsync<ChatPostMessageResponse>(requestUrl, cancellationToken));
         }
     }

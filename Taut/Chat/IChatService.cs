@@ -8,6 +8,7 @@ namespace Taut.Chat
 {
     public interface IChatService
     {
-        IObservable<ChatPostMessageResponse> PostMessage(string channelId, string text);
+        IObservable<ChatPostMessageResponse> PostMessage(string channelId, string text,
+            string username = null, bool? asUser = null);
     }
 }

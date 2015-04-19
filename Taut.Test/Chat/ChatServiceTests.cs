@@ -1,4 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using SoftwareApproach.TestingExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -59,9 +60,52 @@ namespace Taut.Test.Chat
                 "*chat.postMessage*text=test");
         }
 
+        [TestMethod]
+        public async Task WhenUsernameDoesNotHaveValue_ThenPostMessageDoesNotIncludeUsernameInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatPostMessageResponse,
+                async service => await service.PostMessage("123", "test").ToTask(),
+                "*chat.postMessage*");
+            GetApiCallPathAndQuery().ShouldNotContain("username");
+        }
+
+        [TestMethod]
+        public async Task WhenUsernameHasValue_ThenPostMessageIncludesUsernameInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatPostMessageResponse,
+                async service => await service.PostMessage("123", "test", username: "user").ToTask(),
+                "*chat.postMessage*username=user");
+        }
+
+        [TestMethod]
+        public async Task WhenAsUserHasNoValue_ThenPostMessageDoesNotIncludeAsUserInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatPostMessageResponse,
+                async service => await service.PostMessage("123", "test").ToTask(),
+                "*chat.postMessage*");
+            GetApiCallPathAndQuery().ShouldNotContain("as_user");
+        }
+
+        [TestMethod]
+        public async Task WhenAsUserHasValue_ThenPostMessageIncludesAsUserInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatPostMessageResponse,
+                async service => await service.PostMessage("123", "test", asUser: true).ToTask(),
+                "*chat.postMessage*as_user=true");
+        }
+
         #endregion
 
         #region Helpers
+
+        /// <summary>
+        /// Assumes that only one API call has been made and gets the path and query of that call.
+        /// </summary>
+        /// <returns></returns>
+        private string GetApiCallPathAndQuery()
+        {
+            return HttpTest.CallLog.First().Request.RequestUri.PathAndQuery;
+        }
 
         private async Task ShouldHaveCalledTestHelperAsync<T>(T response, Func<IChatService, Task<T>> action,
             string shouldHaveCalled)
