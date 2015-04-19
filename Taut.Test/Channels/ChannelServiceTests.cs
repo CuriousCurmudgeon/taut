@@ -25,12 +25,6 @@ namespace Taut.Test.Channels
             OkChannelListResponse = JsonLoader.LoadJson<ChannelListResponse>(@"Channels/Data/channel_list.json");
         }
 
-        [TestInitialize]
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
         #region Info
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
@@ -46,7 +40,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenChannelIdHasValue_ThenInfoIncludesChannelIdInParams()
         {
-            await ApiCallTestHelperAsync(OkChannelInfoResponse,
+            await ShouldHaveCalledTestHelperAsync(OkChannelInfoResponse,
                 async service => await service.Info("123").ToTask(),
                 "*channels.info*channel=123");
         }
@@ -58,7 +52,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenExcludeArchivedIsDefault_ThenListParamsSetExcludeArchivedTo0()
         {
-            await ApiCallTestHelperAsync(OkChannelListResponse,
+            await ShouldHaveCalledTestHelperAsync(OkChannelListResponse,
                 async service => await service.List().ToTask(),
                 "*channels.list*exclude_archived=0");
         }
@@ -66,7 +60,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenExcludeArchivedIsFalse_ThenListParamsSetExcludeArchivedTo0()
         {
-            await ApiCallTestHelperAsync(OkChannelListResponse,
+            await ShouldHaveCalledTestHelperAsync(OkChannelListResponse,
                 async service => await service.List(excludeArchived: false).ToTask(),
                 "*channels.list*exclude_archived=0");
         }
@@ -74,12 +68,12 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenExcludeArchivedIsTrue_ThenListParamsSetExcludeArchivedTo1()
         {
-            await ApiCallTestHelperAsync(OkChannelListResponse,
+            await ShouldHaveCalledTestHelperAsync(OkChannelListResponse,
                 async service => await service.List(excludeArchived: true).ToTask(),
                 "*channels.list*exclude_archived=1");
         }
 
-        private async Task ApiCallTestHelperAsync<T>(T response, Func<IChannelService, Task<T>> action,
+        private async Task ShouldHaveCalledTestHelperAsync<T>(T response, Func<IChannelService, Task<T>> action,
             string shouldHaveCalled)
         {
             // Arrange
@@ -104,14 +98,6 @@ namespace Taut.Test.Channels
         private ChannelService BuildChannelService()
         {
             return new ChannelService(UserCredentialService.Object);
-        }
-
-        private void SetAuthorizedUserExpectations(string accessToken = "secret")
-        {
-            UserCredentialService.Setup(x => x.IsAuthorized)
-                .Returns(true);
-            UserCredentialService.SetupGet(x => x.Authorization)
-                .Returns(new Authorization() { AccessToken = accessToken });
         }
 
         #endregion

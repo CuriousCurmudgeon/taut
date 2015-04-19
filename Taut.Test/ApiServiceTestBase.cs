@@ -12,6 +12,8 @@ namespace Taut.Test
 {
     public class ApiServiceTestBase
     {
+        protected const string DEFAULT_ACCESS_TOKEN = "secret";
+
         [TestInitialize]
         public virtual void Initialize()
         {
@@ -22,5 +24,13 @@ namespace Taut.Test
         public HttpTest HttpTest { get; private set; }
 
         public Mock<IUserCredentialService> UserCredentialService { get; private set; }
+
+        protected void SetAuthorizedUserExpectations(string accessToken = DEFAULT_ACCESS_TOKEN)
+        {
+            UserCredentialService.Setup(x => x.IsAuthorized)
+                .Returns(true);
+            UserCredentialService.SetupGet(x => x.Authorization)
+                .Returns(new Authorization() { AccessToken = accessToken });
+        }
     }
 }

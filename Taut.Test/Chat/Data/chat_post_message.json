@@ -1,0 +1,12 @@
+﻿{
+    "ok": true,
+    "channel": "C02QG5V77",
+    "ts": "1429410487.000002",
+    "message": {
+        "text": "test",
+        "username": "bot",
+        "type": "message",
+        "subtype": "bot_message",
+        "ts": "1429410487.000002"
+    }
+}
