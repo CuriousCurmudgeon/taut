@@ -1,5 +1,6 @@
-﻿using Flurl;
-using System;
+﻿using System;
+using System.Collections.Generic;
+using Taut.Messages;
 
 namespace Taut.Chat
 {
@@ -19,6 +20,6 @@ namespace Taut.Chat
         IObservable<ChatPostMessageResponse> PostMessage(string channelId, string text,
             string username = null, bool? asUser = null, ParseMode parse = ParseMode.Default,
             bool? linkNames = null, bool? unfurlLinks = null, bool? unfurlMedia = null,
-            Url iconUrl = null, string iconEmoji = null);
+            Uri iconUrl = null, string iconEmoji = null, IEnumerable<Attachment> attachments = null);
     }
 }

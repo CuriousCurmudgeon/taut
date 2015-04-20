@@ -1,14 +1,13 @@
-﻿using Flurl;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using SoftwareApproach.TestingExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Reactive.Threading.Tasks;
-using System.Text;
 using System.Threading.Tasks;
 using Taut.Chat;
+using Taut.Messages;
 
 namespace Taut.Test.Chat
 {
@@ -242,7 +241,7 @@ namespace Taut.Test.Chat
         public async Task WhenIconUrlHasValue_ThenPostMessageIncludesIconUrlInParams()
         {
             await ShouldHaveCalledTestHelperAsync(OkChatPostMessageResponse,
-                async service => await service.PostMessage("123", "test", iconUrl: new Url("https://api.slack.com")).ToTask(),
+                async service => await service.PostMessage("123", "test", iconUrl: new Uri("https://api.slack.com")).ToTask(),
                 "*chat.postMessage*icon_url=https%3A%2F%2Fapi.slack.com");
         }
 
@@ -265,6 +264,38 @@ namespace Taut.Test.Chat
             await ShouldHaveCalledTestHelperAsync(OkChatPostMessageResponse,
                 async service => await service.PostMessage("123", "test", iconEmoji: ":test:").ToTask(),
                 "*chat.postMessage*icon_emoji=%3Atest%3A");
+        }
+
+        #endregion
+
+        #region Attachments
+
+        [TestMethod]
+        public async Task WhenAttachmentsHasNoValue_ThenPostMessageDoesNotIncludeAttachmentsInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatPostMessageResponse,
+                async service => await service.PostMessage("123", "test").ToTask(),
+                "*chat.postMessage*");
+            GetApiCallPathAndQuery().ShouldNotContain("attachments");
+        }
+
+        [TestMethod]
+        public async Task WhenAttachmentsHasValue_ThenPostMessageIncludesAttachmentsInParams()
+        {
+            var attachments = new List<Attachment>
+            {
+                new Attachment()
+                {
+                    Color = "good",
+                    AuthorName = "Taut",
+                    AuthorLink = new Uri("https://github.com/CuriousCurmudgeon/taut"),
+                    Text = "Attachment test",
+                },
+            };
+            // This may be too brittle. We're relying on attachment properties being serialized in the same order.
+            await ShouldHaveCalledTestHelperAsync(OkChatPostMessageResponse,
+                async service => await service.PostMessage("123", "test", attachments: attachments).ToTask(),
+                "*chat.postMessage*attachments=%5B%7B%22color%22%3A%22good%22%2C%22author_name%22%3A%22Taut%22%2C%22author_link%22%3A%22https%3A%2F%2Fgithub.com%2FCuriousCurmudgeon%2Ftaut%22%2C%22text%22%3A%22Attachment%20test%22%2C%22fields%22%3A%5B%5D%7D%5D");
         }
 
         #endregion

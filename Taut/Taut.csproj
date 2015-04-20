@@ -46,6 +46,8 @@
     <Compile Include="Chat\ChatService.cs" />
     <Compile Include="Chat\IChatService.cs" />
     <Compile Include="IAuthenticatedService.cs" />
+    <Compile Include="Messages\Attachment.cs" />
+    <Compile Include="Messages\AttachmentField.cs" />
     <Compile Include="Messages\Message.cs" />
     <Compile Include="Metadata\TextMetadata.cs" />
     <Compile Include="ObjectExtensions.cs" />

@@ -1,7 +1,9 @@
-﻿using Flurl;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using Taut.Authorizations;
+using Taut.Messages;
 
 namespace Taut.Chat
 {
@@ -15,7 +17,7 @@ namespace Taut.Chat
         public IObservable<ChatPostMessageResponse> PostMessage(string channelId, string text,
             string username = null, bool? asUser = null, ParseMode parse = ParseMode.Default,
             bool? linkNames = null, bool? unfurlLinks = null, bool? unfurlMedia = null,
-            Url iconUrl = null, string iconEmoji = null)
+            Uri iconUrl = null, string iconEmoji = null, IEnumerable<Attachment> attachments = null)
         {
             channelId.ThrowIfNull("channelId");
             text.ThrowIfNull("text");
@@ -36,6 +38,17 @@ namespace Taut.Chat
             if(linkNames.HasValue)
             {
                 queryParams.Add("link_names", Convert.ToInt32(linkNames.Value));
+            }
+
+            if (attachments != null)
+            {
+                var settings = new JsonSerializerSettings
+                {
+                    DefaultValueHandling = DefaultValueHandling.Ignore,
+                    ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                };
+                
+                queryParams.Add("attachments", JsonConvert.SerializeObject(attachments, settings));
             }
 
             return ObservableApiCall(POST_MESSAGE_METHOD, queryParams,
