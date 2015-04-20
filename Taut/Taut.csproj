@@ -36,6 +36,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Authorizations\Authorization.cs" />
+    <Compile Include="Authorizations\IOAuthService.cs" />
+    <Compile Include="Authorizations\OAuthService.cs" />
     <Compile Include="BaseResponse.cs" />
     <Compile Include="Channels\Channel.cs" />
     <Compile Include="Channels\ChannelInfoResponse.cs" />

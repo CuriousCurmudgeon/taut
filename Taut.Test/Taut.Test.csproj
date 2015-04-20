@@ -89,6 +89,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="ApiServiceTestBase.cs" />
+    <Compile Include="Authorizations\OAuthServiceTests.cs" />
     <Compile Include="BaseApiServiceTests.cs" />
     <Compile Include="BaseAuthenticatedApiServiceTests.cs" />
     <Compile Include="Channels\ChannelServiceTests.cs" />
