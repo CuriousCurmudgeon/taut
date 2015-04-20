@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Flurl.Http;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,7 @@ namespace Taut.Authorizations
     public class OAuthService : BaseApiService, IOAuthService
     {
         private const string OAUTH_PATH = "/oauth/authorize";
+        private const string ACCESS_METHOD = "oauth.access";
 
         public OAuthService(string clientId, string clientSecret)
         {
@@ -39,10 +42,27 @@ namespace Taut.Authorizations
             return new Uri(BuildRequestUrl(OAUTH_PATH, queryParams).ToString());
         }
 
-        public Authorization Access(string code, Uri redirectUri = null)
+        public IObservable<Authorization> Access(string code, Uri redirectUri = null)
         {
-            throw new NotImplementedException();
+            code.ThrowIfNull("code");
+
+            var queryParams = new
+            {
+                client_id = ClientId,
+                client_secret = ClientSecret,
+                code = code,
+                redirect_uri = redirectUri,
+            };
+            return ObservableApiCall(ACCESS_METHOD, queryParams,
+                async (requestUrl, cancellationToken) =>
+                {
+                    var response = await requestUrl.GetAsync(cancellationToken);
+                    var responseContent = (response.Content == null) ? null : await response.Content.ReadAsStringAsync();
+                    return JsonConvert.DeserializeObject<Authorization>(responseContent);
+                });
         }
+
+        #region Helpers
 
         private string ScopesToString(AuthScopes scope)
         {
@@ -56,5 +76,7 @@ namespace Taut.Authorizations
             }
             return string.Join(",", scopes);
         }
+
+        #endregion
     }
 }

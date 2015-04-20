@@ -27,6 +27,6 @@ namespace Taut.Authorizations
 
         Uri BuildOAuthUri(string state, AuthScopes scope, Uri redirectUri = null, string teamId = null);
 
-        Authorization Access(string code, Uri redirectUri = null);
+        IObservable<Authorization> Access(string code, Uri redirectUri = null);
     }
 }

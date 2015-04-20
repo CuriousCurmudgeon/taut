@@ -32,5 +32,14 @@ namespace Taut.Test
             UserCredentialService.SetupGet(x => x.Authorization)
                 .Returns(new Authorization() { AccessToken = accessToken });
         }
+
+        /// <summary>
+        /// Assumes that only one API call has been made and gets the path and query of that call.
+        /// </summary>
+        /// <returns></returns>
+        protected string GetApiCallPathAndQuery()
+        {
+            return HttpTest.CallLog.First().Request.RequestUri.PathAndQuery;
+        }
     }
 }

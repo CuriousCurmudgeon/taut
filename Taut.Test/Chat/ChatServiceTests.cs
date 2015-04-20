@@ -304,15 +304,6 @@ namespace Taut.Test.Chat
 
         #region Helpers
 
-        /// <summary>
-        /// Assumes that only one API call has been made and gets the path and query of that call.
-        /// </summary>
-        /// <returns></returns>
-        private string GetApiCallPathAndQuery()
-        {
-            return HttpTest.CallLog.First().Request.RequestUri.PathAndQuery;
-        }
-
         private async Task ShouldHaveCalledTestHelperAsync<T>(T response, Func<IChatService, Task<T>> action,
             string shouldHaveCalled)
         {

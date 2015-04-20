@@ -3,6 +3,8 @@ using SoftwareApproach.TestingExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
+using System.Reactive.Threading.Tasks;
 using System.Text;
 using System.Threading.Tasks;
 using Taut.Authorizations;
@@ -14,6 +16,14 @@ namespace Taut.Test.Authorizations
     {
         private const string DEFAULT_CLIENT_ID = "123";
         private const string DEFAULT_CLIENT_SECRET = "456";
+
+        private static Authorization AuthorizationResponse;
+
+        [ClassInitialize]
+        public static void ClassInitialize(TestContext context)
+        {
+            AuthorizationResponse = JsonLoader.LoadJson<Authorization>(@"Authorizations/Data/oauth_access.json");
+        }
 
         #region Constructor
 
@@ -95,7 +105,7 @@ namespace Taut.Test.Authorizations
             var uri = service.BuildOAuthUri("state", AuthScopes.Identify, redirectUri: new Uri("https://github.com/CuriousCurmudgeon/taut"));
 
             // Assert
-            uri.AbsoluteUri.ShouldContain("redirect_uri=");
+            uri.AbsoluteUri.ShouldContain("redirect_uri=https%3A%2F%2Fgithub.com%2FCuriousCurmudgeon%2Ftaut");
         }
 
         #endregion
@@ -163,12 +173,92 @@ namespace Taut.Test.Authorizations
 
         #endregion
 
+        #region Access
+
+        [TestMethod]
+        public async Task WhenAccessIsCalled_ThenClientIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(AuthorizationResponse,
+                async service => await service.Access("789").ToTask(),
+                "*oauth.access*client_id=123");
+        }
+
+        [TestMethod]
+        public async Task WhenAccessIsCalled_ThenClientSecretInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(AuthorizationResponse,
+                async service => await service.Access("789").ToTask(),
+                "*oauth.access*client_secret=456");
+        }
+
+        #region code
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenCodeIsNull_ThenAccessThrowsException()
+        {
+            // Arrange
+            var service = BuildOAuthService();
+
+            // Act
+            service.Access(null);
+        }
+
+        [TestMethod]
+        public async Task WhenCodeHasValue_ThenAccessIncludesCodeInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(AuthorizationResponse,
+                async service => await service.Access("789").ToTask(),
+                "*oauth.access*code=789");
+        }
+
+        #endregion
+
+        #region redirect_uri
+
+        [TestMethod]
+        public async Task WhenRedirectUriIsNull_ThenAccessRequestDoesNotContainRedirectUri()
+        {
+            await ShouldHaveCalledTestHelperAsync(AuthorizationResponse,
+                async service => await service.Access("789").ToTask(),
+                "*oauth.access*");
+            GetApiCallPathAndQuery().ShouldNotContain("redirect_uri");
+        }
+
+        [TestMethod]
+        public async Task WhenRedirectUriHasValue_ThenAccessRequestDoesContainRedirectUri()
+        {
+            await ShouldHaveCalledTestHelperAsync(AuthorizationResponse,
+                async service => await service.Access("789", redirectUri: new Uri("https://github.com/CuriousCurmudgeon/taut")).ToTask(),
+                "*oauth.access*redirect_uri=https%3A%2F%2Fgithub.com%2FCuriousCurmudgeon%2Ftaut");
+        }
+
+        #endregion
+
+        #endregion
+
         #region Helpers
 
         private OAuthService BuildOAuthService(string clientId = DEFAULT_CLIENT_ID,
             string clientSecret = DEFAULT_CLIENT_SECRET)
         {
             return new OAuthService(clientId, clientSecret);
+        }
+
+        private async Task ShouldHaveCalledTestHelperAsync<T>(T response, Func<IOAuthService, Task<T>> action,
+            string shouldHaveCalled)
+        {
+            // Arrange
+            var service = BuildOAuthService();
+            HttpTest.RespondWithJson(response);
+            SetAuthorizedUserExpectations();
+
+            // Act
+            var result = await action.Invoke(service);
+
+            // Assert
+            HttpTest.ShouldHaveCalled(shouldHaveCalled)
+                .WithVerb(HttpMethod.Get)
+                .Times(1);
         }
 
         #endregion
