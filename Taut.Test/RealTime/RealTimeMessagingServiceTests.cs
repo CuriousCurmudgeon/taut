@@ -52,14 +52,10 @@ namespace Taut.Test.RealTime
                 .Times(1);
         }
 
-        #region Test Helpers
-
         private RealTimeMessagingService BuildRealTimeMessagingService()
         {
             return new RealTimeMessagingService(UserCredentialService.Object);
         }
-
-        #endregion
 
         #endregion
     }

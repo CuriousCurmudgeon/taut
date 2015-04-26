@@ -94,6 +94,7 @@
     <Compile Include="BaseAuthenticatedApiServiceTests.cs" />
     <Compile Include="Channels\ChannelServiceTests.cs" />
     <Compile Include="Chat\ChatServiceTests.cs" />
+    <Compile Include="IMs\DirectMessageChannelServiceTests.cs" />
     <Compile Include="JsonLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealTime\RealTimeMessagingServiceTests.cs" />
@@ -113,6 +114,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Authorizations\Data\oauth_access.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="IMs\Data\im_list.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />

@@ -1,0 +1,131 @@
+﻿{
+    "ok": true,
+    "ims": [
+        {
+            "id": "D0257FX4G",
+            "is_im": true,
+            "user": "USLACKBOT",
+            "created": 1392689804,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D0257FX4Q",
+            "is_im": true,
+            "user": "U0254DMM0",
+            "created": 1392689804,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D0258B65H",
+            "is_im": true,
+            "user": "U0258B65B",
+            "created": 1392772160,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D02593GCF",
+            "is_im": true,
+            "user": "U02593GC3",
+            "created": 1392833172,
+            "is_user_deleted": true
+        },
+        {
+            "id": "D0259BR24",
+            "is_im": true,
+            "user": "U0259BR1E",
+            "created": 1392833195,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D0259BUPY",
+            "is_im": true,
+            "user": "U0259BUPA",
+            "created": 1392833455,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D0259C0EJ",
+            "is_im": true,
+            "user": "U0259C0E4",
+            "created": 1392833603,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D0259CGHC",
+            "is_im": true,
+            "user": "U0259CGH6",
+            "created": 1392834233,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D025AJ9CB",
+            "is_im": true,
+            "user": "U025AJ9BT",
+            "created": 1392928287,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D0293Q53Z",
+            "is_im": true,
+            "user": "U0293Q52K",
+            "created": 1398184163,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D02947L0H",
+            "is_im": true,
+            "user": "U02947L05",
+            "created": 1398202338,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D029CQ6PD",
+            "is_im": true,
+            "user": "U029CQ6NX",
+            "created": 1398791894,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D029SH2L6",
+            "is_im": true,
+            "user": "U029SH2KN",
+            "created": 1399618707,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D02A4L5DT",
+            "is_im": true,
+            "user": "U02A4L5D7",
+            "created": 1400506383,
+            "is_user_deleted": true
+        },
+        {
+            "id": "D02DRNN2N",
+            "is_im": true,
+            "user": "U02BR706T",
+            "created": 1405615509,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D048NKXUW",
+            "is_im": true,
+            "user": "U02C3Q3A8",
+            "created": 1428092582,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D02D19JLV",
+            "is_im": true,
+            "user": "U02D19JKR",
+            "created": 1404827659,
+            "is_user_deleted": false
+        },
+        {
+            "id": "D02N7UPC6",
+            "is_im": true,
+            "user": "U02N7UPAQ",
+            "created": 1412355459,
+            "is_user_deleted": false
+        }
+    ]
+}

@@ -49,6 +49,9 @@
     <Compile Include="Chat\IChatService.cs" />
     <Compile Include="IAuthenticatedService.cs" />
     <Compile Include="IMs\DirectMessageChannel.cs" />
+    <Compile Include="IMs\DirectMessageChannelListResponse.cs" />
+    <Compile Include="IMs\DirectMessageChannelService.cs" />
+    <Compile Include="IMs\IDirectMessageChannelService.cs" />
     <Compile Include="Messages\Attachment.cs" />
     <Compile Include="Messages\AttachmentField.cs" />
     <Compile Include="Messages\Message.cs" />
