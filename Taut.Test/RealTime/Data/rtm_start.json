@@ -1,0 +1,445 @@
+﻿{
+    "ok": true,
+    "self": {
+        "id": "U0257FX4E",
+        "name": "brian",
+        "prefs": {
+            "highlight_words": "",
+            "user_colors": "",
+            "color_names_in_list": true,
+            "growls_enabled": true,
+            "tz": "America\/New_York",
+            "push_dm_alert": true,
+            "push_mention_alert": true,
+            "push_everything": false,
+            "push_idle_wait": 2,
+            "push_sound": "b2.mp3",
+            "push_loud_channels": "",
+            "push_mention_channels": "",
+            "push_loud_channels_set": "C0259S0HQ",
+            "email_alerts": "hourly",
+            "email_alerts_sleep_until": 0,
+            "email_misc": false,
+            "email_weekly": true,
+            "welcome_message_hidden": false,
+            "all_channels_loud": true,
+            "loud_channels": "",
+            "never_channels": "",
+            "loud_channels_set": "C028K1HQW,C02HW8A5B,C02QG5V77,C02H9SGQM,C02SC9BHM",
+            "show_member_presence": true,
+            "search_sort": "timestamp",
+            "expand_inline_imgs": true,
+            "expand_internal_inline_imgs": true,
+            "expand_snippets": false,
+            "posts_formatting_guide": true,
+            "seen_welcome_2": true,
+            "seen_ssb_prompt": false,
+            "search_only_my_channels": false,
+            "emoji_mode": "google",
+            "emoji_use": "{\"rimshot\":2,\"tiger\":1,\"punch\":1,\"bear\":1,\"stitch\":1,\"thumbsup\":6,\"simple_smile\":1,\"dog\":1,\"dog2\":2,\"boo\":1,\"rabbit\":1,\"rabbit2\":1,\"fire\":1,\"turtle\":1,\"disappointed\":1,\"no_entry_sign\":1,\"bread\":1,\"thumbsdown\":1}",
+            "has_invited": false,
+            "has_uploaded": true,
+            "has_created_channel": true,
+            "search_exclude_channels": "",
+            "messages_theme": "light_with_avatars",
+            "webapp_spellcheck": true,
+            "no_joined_overlays": true,
+            "no_created_overlays": false,
+            "dropbox_enabled": false,
+            "seen_user_menu_tip_card": true,
+            "seen_team_menu_tip_card": true,
+            "seen_channel_menu_tip_card": true,
+            "seen_message_input_tip_card": true,
+            "seen_channels_tip_card": true,
+            "seen_domain_invite_reminder": false,
+            "seen_member_invite_reminder": false,
+            "seen_flexpane_tip_card": true,
+            "seen_search_input_tip_card": true,
+            "mute_sounds": false,
+            "arrow_history": false,
+            "tab_ui_return_selects": true,
+            "obey_inline_img_limit": false,
+            "new_msg_snd": "knock_brush.mp3",
+            "collapsible": false,
+            "collapsible_by_click": true,
+            "require_at": false,
+            "mac_ssb_bounce": "",
+            "mac_ssb_bullet": true,
+            "expand_non_media_attachments": true,
+            "show_typing": true,
+            "pagekeys_handled": true,
+            "last_snippet_type": "text",
+            "display_real_names_override": 0,
+            "time24": true,
+            "enter_is_special_in_tbt": false,
+            "graphic_emoticons": false,
+            "convert_emoticons": true,
+            "autoplay_chat_sounds": true,
+            "ss_emojis": true,
+            "sidebar_behavior": "",
+            "mark_msgs_read_immediately": false,
+            "start_scroll_at_oldest": false,
+            "snippet_editor_wrap_long_lines": false,
+            "ls_disabled": false,
+            "sidebar_theme": "custom_theme",
+            "sidebar_theme_custom_values": "{\"column_bg\":\"#084700\",\"menu_bg\":\"#1e5e19\",\"active_item\":\"#2f66ad\",\"active_item_text\":\"#FFFFFF\",\"hover_item\":\"#D37C71\",\"text_color\":\"#FFFFFF\",\"active_presence\":\"#16c3f7\",\"badge\":\"#F15340\"}",
+            "f_key_search": false,
+            "k_key_omnibox": true,
+            "speak_growls": false,
+            "mac_speak_voice": "com.apple.speech.synthesis.voice.Alex",
+            "mac_speak_speed": 250,
+            "comma_key_prefs": false,
+            "at_channel_suppressed_channels": "",
+            "push_at_channel_suppressed_channels": "",
+            "prompted_for_email_disabling": false,
+            "full_text_extracts": false,
+            "no_text_in_notifications": false,
+            "muted_channels": "",
+            "no_macssb1_banner": false,
+            "no_winssb1_banner": true,
+            "privacy_policy_seen": true,
+            "search_exclude_bots": false,
+            "fuzzy_matching": false,
+            "load_lato_2": false,
+            "fuller_timestamps": false,
+            "last_seen_at_channel_warning": 1429533233210,
+            "enable_flexpane_rework": false,
+            "flex_resize_window": false,
+            "msg_preview": false,
+            "msg_preview_displaces": true,
+            "msg_preview_persistent": true,
+            "emoji_autocomplete_big": false,
+            "winssb_run_from_tray": true,
+            "two_factor_auth_enabled": true,
+            "mentions_exclude_at_channels": true,
+            "box_enabled": false
+        },
+        "created": 1392689804,
+        "manual_presence": "active"
+    },
+    "team": {
+        "id": "T0254DMAZ",
+        "name": "Test team",
+        "email_domain": "example.com",
+        "domain": "example",
+        "msg_edit_window_mins": -1,
+        "prefs": {
+            "default_channels": [
+                "C0254DMM6",
+                "C0254DMMA"
+            ],
+            "msg_edit_window_mins": -1,
+            "hide_referers": false,
+            "display_real_names": false,
+            "allow_message_deletion": true,
+            "who_can_at_everyone": "regular",
+            "who_can_at_channel": "ra",
+            "who_can_create_channels": "regular",
+            "who_can_archive_channels": "regular",
+            "who_can_create_groups": "ra",
+            "who_can_post_general": "ra",
+            "who_can_kick_channels": "admin",
+            "who_can_kick_groups": "regular",
+            "retention_type": 0,
+            "retention_duration": 0,
+            "group_retention_type": 0,
+            "group_retention_duration": 0,
+            "dm_retention_type": 0,
+            "dm_retention_duration": 0,
+            "require_at_for_mention": 0,
+            "warn_before_at_channel": "always",
+            "compliance_export_start": 0
+        },
+        "icon": {
+            "image_34": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-03-18\/4098578114_5c636fbebd064f4d1e9d_34.jpg",
+            "image_44": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-03-18\/4098578114_5c636fbebd064f4d1e9d_44.jpg",
+            "image_68": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-03-18\/4098578114_5c636fbebd064f4d1e9d_68.jpg",
+            "image_88": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-03-18\/4098578114_5c636fbebd064f4d1e9d_88.jpg",
+            "image_102": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-03-18\/4098578114_5c636fbebd064f4d1e9d_102.jpg",
+            "image_132": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-03-18\/4098578114_5c636fbebd064f4d1e9d_132.jpg",
+            "image_original": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-03-18\/4098578114_5c636fbebd064f4d1e9d_original.jpg"
+        },
+        "over_storage_limit": false,
+        "plan": "std"
+    },
+    "latest_event_ts": "1430016552.000000",
+    "channels": [
+        
+        {
+            "id": "C02QG5V77",
+            "name": "test",
+            "is_channel": true,
+            "created": 1413770260,
+            "creator": "U0257FX4E",
+            "is_archived": false,
+            "is_general": false,
+            "is_member": true,
+            "last_read": "1429497563.000010",
+            "latest": {
+                "text": "It still works.",
+                "username": "bot",
+                "type": "message",
+                "subtype": "bot_message",
+                "ts": "1429497563.000010"
+            },
+            "unread_count": 0,
+            "unread_count_display": 0,
+            "members": [
+                "U0254DMM0",
+                "U0257FX4E",
+                "U029SH2KN"
+            ],
+            "topic": {
+                "value": "Mess around with hubot without annoying others.",
+                "creator": "U0257FX4E",
+                "last_set": 1413808232
+            },
+            "purpose": {
+                "value": "",
+                "creator": "",
+                "last_set": 0
+            }
+        },
+        {
+            "id": "C02546KS3",
+            "name": "twitter",
+            "is_channel": true,
+            "created": 1392312301,
+            "creator": "U0254DMM0",
+            "is_archived": true,
+            "is_general": false,
+            "is_member": false
+        }
+    ],
+    "groups": [],
+    "ims": [
+        {
+            "id": "D0259BR24",
+            "is_im": true,
+            "user": "U0259BR1E",
+            "created": 1392833195,
+            "last_read": "1397599127.000002",
+            "latest": {
+                "type": "message",
+                "user": "U0259BR1E",
+                "text": "hey, my recent commit may have broken your view stuff (unless you're still working on the 2nd column) but I added location switching",
+                "ts": "1397599127.000002"
+            },
+            "unread_count": 0,
+            "unread_count_display": 0,
+            "is_open": true
+        },
+        {
+            "id": "D0259BUPY",
+            "is_im": true,
+            "user": "U0259BUPA",
+            "created": 1392833455,
+            "last_read": "1427117927.000003",
+            "latest": {
+                "type": "message",
+                "user": "U0257FX4E",
+                "text": "I'm assuming we do, but I don't have access to it.",
+                "ts": "1427117927.000003"
+            },
+            "unread_count": 0,
+            "unread_count_display": 0,
+            "is_open": true
+        }
+    ],
+    "users": [
+        {
+            "id": "U0257FX4E",
+            "name": "brian",
+            "deleted": false,
+            "status": null,
+            "color": "4bbe2e",
+            "real_name": "Brian Meeker",
+            "tz": "America\/New_York",
+            "tz_label": "Eastern Daylight Time",
+            "tz_offset": -14400,
+            "profile": {
+                "first_name": "Brian",
+                "image_24": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2014-02-17\/2177296533_24.jpg",
+                "image_32": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2014-02-17\/2177296533_32.jpg",
+                "image_48": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2014-02-17\/2177296533_48.jpg",
+                "image_72": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2014-02-17\/2177296533_72.jpg",
+                "image_192": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2014-02-17\/2177296533_192.jpg",
+                "image_original": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2014-02-17\/2177296533_original.jpg",
+                "skype": "curiouscurmudgeon",
+                "title": "Engineering Wizard",
+                "phone": "(330)646-4128",
+                "last_name": "Meeker",
+                "real_name": "Brian Meeker",
+                "real_name_normalized": "Brian Meeker",
+                "email": "brian.meeker@infernored.com"
+            },
+            "is_admin": false,
+            "is_owner": false,
+            "is_primary_owner": false,
+            "is_restricted": false,
+            "is_ultra_restricted": false,
+            "is_bot": false,
+            "has_files": true,
+            "has_2fa": true,
+            "presence": "active"
+        }
+    ],
+    "bots": [
+        {
+            "id": "B025ABMC9",
+            "name": "bitbucket",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/10800\/img\/services\/bitbucket_48.png"
+            }
+        },
+        {
+            "id": "B0254DY1W",
+            "name": "github",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/10562\/img\/services\/github_48.png"
+            }
+        },
+        {
+            "id": "B02JR0G35",
+            "name": "github",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/20653\/img\/services\/github_48.png"
+            }
+        },
+        {
+            "id": "B0254EDU0",
+            "name": "hangouts",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/11591\/img\/services\/hangouts_48.png"
+            }
+        },
+        {
+            "id": "B02GXEMSR",
+            "name": "hubot",
+            "deleted": false,
+            "icons": {
+                "emoji": ":octopus:",
+                "image_64": "https:\/\/slack-assets2.s3-us-west-2.amazonaws.com\/5504\/img\/emoji\/1f419.png"
+            }
+        },
+        {
+            "id": "B03CRUKV8",
+            "name": "hubot",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/26397\/plugins\/hubot\/assets\/bot_48.png"
+            }
+        },
+        {
+            "id": "B025A6GJ5",
+            "name": "incoming-webhook",
+            "deleted": false,
+            "icons": {
+                "emoji": ":ghost:",
+                "image_64": "https:\/\/slack-assets2.s3-us-west-2.amazonaws.com\/5504\/img\/emoji\/1f47b.png"
+            }
+        },
+        {
+            "id": "B03QRESS9",
+            "name": "TeamCity",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/12078\/img\/services\/incoming-webhook_48.png"
+            }
+        },
+        {
+            "id": "B02546HAF",
+            "name": "trello",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/10562\/img\/services\/trello_48.png"
+            }
+        },
+        {
+            "id": "B02FGFG82",
+            "name": "Trello",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/10562\/img\/services\/trello_48.png"
+            }
+        },
+        {
+            "id": "B02NDP469",
+            "name": "trello",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/10562\/img\/services\/trello_48.png"
+            }
+        },
+        {
+            "id": "B02NY6SCH",
+            "name": "Trello",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/22752\/plugins\/trello\/assets\/bot_48.png"
+            }
+        },
+        {
+            "id": "B03DPKTHG",
+            "name": "Trello",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/22752\/plugins\/trello\/assets\/bot_48.png"
+            }
+        },
+        {
+            "id": "B03SB7AN2",
+            "name": "Trello",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/010d\/img\/services\/trello_48.png"
+            }
+        },
+        {
+            "id": "B04DYFJG4",
+            "name": "Trello",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/010d\/img\/services\/trello_48.png"
+            }
+        },
+        {
+            "id": "B0254EBTS",
+            "name": "twitter",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/10562\/img\/services\/twitter_48.png"
+            }
+        },
+        {
+            "id": "B028M7SJQ",
+            "name": "zapier",
+            "deleted": false,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/10563\/img\/services\/zapier_48.png"
+            }
+        },
+        {
+            "id": "B025DG80X",
+            "name": "twitter",
+            "deleted": true,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/10562\/img\/services\/twitter_48.png"
+            }
+        },
+        {
+            "id": "B03CS8ZQ2",
+            "name": "slash-commands",
+            "deleted": true,
+            "icons": {
+                "image_48": "https:\/\/slack.global.ssl.fastly.net\/23267\/plugins\/slash_commands\/assets\/bot_48.png"
+            }
+        }
+    ],
+    "cache_version": "v7-dog",
+    "url": "wss:\/\/ms110.slack-msgs.com\/websocket\/4heKknWLbi4hDH_65ikC2NCVYIKriKksVzeK0PlKE9CSDivZ3A6EXRYMNxKrcMaVjxUmWTUHtTIJILhlL4bsMFwLwxkx59Cc0GQA_YEUeYg="
+}

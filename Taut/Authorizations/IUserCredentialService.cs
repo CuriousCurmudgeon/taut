@@ -16,5 +16,10 @@ namespace Taut.Authorizations
         /// </summary>
         /// <returns>Null if no user is authorized. Otherwise, the authorized user.</returns>
         Authorization Authorization { get; set; }
+
+        /// <summary>
+        /// Remove the current user's authorization.
+        /// </summary>
+        void ClearAuthorization();
     }
 }

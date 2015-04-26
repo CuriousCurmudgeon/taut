@@ -96,8 +96,12 @@
     <Compile Include="Chat\ChatServiceTests.cs" />
     <Compile Include="JsonLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RealTime\RealTimeMessagingServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="RealTime\Data\rtm_start.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="app.config" />
     <Content Include="Channels\Data\channel_info.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

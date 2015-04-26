@@ -45,6 +45,16 @@ namespace Taut.WinRT.Authorizations
             set { SetAuthorization(value); }
         }
 
+        public void ClearAuthorization()
+        {
+            // In practice, multiple authorizations should never end up in the Password Vault, but
+            // we'll assume that it is possible here.
+            foreach (var credential in GetAllPasswordCredentials())
+            {
+                _vault.Remove(credential);
+            }
+        }
+
         #endregion
 
         #region Private Helpers
@@ -75,16 +85,6 @@ namespace Taut.WinRT.Authorizations
             {
                 var authorizationAsPassword = string.Format("{0}|{1}", authorization.AccessToken, authorization.Scope);
                 _vault.Add(new PasswordCredential(RESOURCE_NAME, USERNAME, authorizationAsPassword));
-            }
-        }
-
-        private void ClearAuthorization()
-        {
-            // In practice, multiple authorizations should never end up in the Password Vault, but
-            // we'll assume that it is possible here.
-            foreach (var credential in GetAllPasswordCredentials())
-            {
-                _vault.Remove(credential);
             }
         }
 

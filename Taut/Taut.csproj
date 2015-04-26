@@ -48,6 +48,7 @@
     <Compile Include="Chat\ChatService.cs" />
     <Compile Include="Chat\IChatService.cs" />
     <Compile Include="IAuthenticatedService.cs" />
+    <Compile Include="IMs\DirectMessageChannel.cs" />
     <Compile Include="Messages\Attachment.cs" />
     <Compile Include="Messages\AttachmentField.cs" />
     <Compile Include="Messages\Message.cs" />
@@ -58,7 +59,13 @@
     <Compile Include="BaseApiService.cs" />
     <Compile Include="BaseAuthenticatedApiService.cs" />
     <Compile Include="Authorizations\IUserCredentialService.cs" />
+    <Compile Include="RealTime\IRealTimeMessagingService.cs" />
+    <Compile Include="RealTime\RealTimeMessagingService.cs" />
+    <Compile Include="RealTime\RealTimeMessagingStartResponse.cs" />
     <Compile Include="SlackApiException.cs" />
+    <Compile Include="Teams\Team.cs" />
+    <Compile Include="Users\User.cs" />
+    <Compile Include="Users\UserProfile.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Flurl">
