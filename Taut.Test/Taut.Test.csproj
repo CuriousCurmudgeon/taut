@@ -98,6 +98,7 @@
     <Compile Include="JsonLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealTime\RealTimeMessagingServiceTests.cs" />
+    <Compile Include="Users\UserServiceTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="RealTime\Data\rtm_start.json">
@@ -120,6 +121,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
+    <Content Include="Users\Data\users_list.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Taut\Taut.csproj">

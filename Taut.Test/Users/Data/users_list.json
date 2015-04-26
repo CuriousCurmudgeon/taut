@@ -1,0 +1,23 @@
+﻿{
+    "ok": true,
+    "members": [
+        {
+            "id": "U03CPU517",
+            "name": "bot",
+            "deleted": true,
+            "profile": {
+                "bot_id": "B03CRUKV8",
+                "image_24": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-01-16\/3431957163_2ec9bdbb7c4f48e8b619_24.jpg",
+                "image_32": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-01-16\/3431957163_2ec9bdbb7c4f48e8b619_32.jpg",
+                "image_48": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-01-16\/3431957163_2ec9bdbb7c4f48e8b619_48.jpg",
+                "image_72": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-01-16\/3431957163_2ec9bdbb7c4f48e8b619_72.jpg",
+                "image_192": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-01-16\/3431957163_2ec9bdbb7c4f48e8b619_192.jpg",
+                "image_original": "https:\/\/s3-us-west-2.amazonaws.com\/slack-files2\/avatars\/2015-01-16\/3431957163_2ec9bdbb7c4f48e8b619_original.jpg",
+                "real_name": "",
+                "real_name_normalized": ""
+            },
+            "is_bot": true,
+            "has_files": false
+        }
+    ]
+}
