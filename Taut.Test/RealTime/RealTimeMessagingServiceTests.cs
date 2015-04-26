@@ -10,6 +10,7 @@ using Taut.RealTime;
 
 namespace Taut.Test.RealTime
 {
+    [TestClass]
     public class RealTimeMessagingServiceTests : ApiServiceTestBase
     {
         private static RealTimeMessagingStartResponse OkRealTimeMessagingStartResponse;
