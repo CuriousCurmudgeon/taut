@@ -80,6 +80,20 @@ namespace Taut.Test.Authorizations
             uri.AbsoluteUri.ShouldContain(string.Format("state={0}", state));
         }
 
+        [TestMethod]
+        public void WhenBuildOAuthUriIsCalled_ThenResulIsOAuthAuthorize()
+        {
+            // Arrange
+            var service = BuildOAuthService();
+            var state = "state";
+
+            // Act
+            var uri = service.BuildOAuthUri(state, AuthScopes.Identify);
+
+            // Assert
+            uri.AbsoluteUri.ShouldContain("https://slack.com/oauth/authorize");
+        }
+
         #region redirect_uri
 
         [TestMethod]

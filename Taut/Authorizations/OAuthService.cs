@@ -1,4 +1,5 @@
-﻿using Flurl.Http;
+﻿using Flurl;
+using Flurl.Http;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -10,6 +11,7 @@ namespace Taut.Authorizations
 {
     public class OAuthService : BaseApiService, IOAuthService
     {
+        private const string AUTHORIZE_URL = "https://slack.com/";
         private const string OAUTH_PATH = "/oauth/authorize";
         private const string ACCESS_METHOD = "oauth.access";
 
@@ -39,7 +41,9 @@ namespace Taut.Authorizations
                 { "scope",  ScopesToString(scope) },
             };
 
-            return new Uri(BuildRequestUrl(OAUTH_PATH, queryParams).ToString());
+            return new Uri(AUTHORIZE_URL
+                .AppendPathSegment(OAUTH_PATH)
+                .SetQueryParams(queryParams));
         }
 
         public IObservable<Authorization> Access(string code, Uri redirectUri = null)
