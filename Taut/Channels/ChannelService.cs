@@ -12,11 +12,21 @@ namespace Taut.Channels
 {
     public class ChannelService : BaseAuthenticatedApiService, IChannelService
     {
+        private const string ARCHIVE_METHOD = "channels.archive";
         private const string INFO_METHOD = "channels.info";
         private const string LIST_METHOD = "channels.list";
 
         public ChannelService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
+
+        public IObservable<BaseResponse> Archive(string channelId)
+        {
+            channelId.ThrowIfNull("channelId");
+
+            return ObservableApiCall(ARCHIVE_METHOD,
+                    new { channel = channelId },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<BaseResponse>(requestUrl, cancellationToken));
+        }
 
         public IObservable<ChannelInfoResponse> Info(string channelId)
         {

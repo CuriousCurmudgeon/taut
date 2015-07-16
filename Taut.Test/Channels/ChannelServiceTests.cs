@@ -15,15 +15,39 @@ namespace Taut.Test.Channels
     [TestClass]
     public class ChannelServiceTests : ApiServiceTestBase
     {
+        private static BaseResponse OkChannelArchiveResponse;
         private static ChannelInfoResponse OkChannelInfoResponse;
         private static ChannelListResponse OkChannelListResponse;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
+            OkChannelArchiveResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/channel_archive.json");
             OkChannelInfoResponse = JsonLoader.LoadJson<ChannelInfoResponse>(@"Channels/Data/channel_info.json");
             OkChannelListResponse = JsonLoader.LoadJson<ChannelListResponse>(@"Channels/Data/channel_list.json");
         }
+
+        #region Archive
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenArchiveThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Archive(null);
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenArchiveIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelArchiveResponse,
+                async service => await service.Archive("123").ToTask(),
+                "*channels.archive*channel=123");
+        }
+
+        #endregion
 
         #region Info
 

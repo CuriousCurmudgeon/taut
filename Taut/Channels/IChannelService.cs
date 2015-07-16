@@ -7,6 +7,14 @@ namespace Taut.Channels
     public interface IChannelService : IAuthenticatedService
     {
         /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.archive">Documentation</a>.
+        /// </summary>
+        /// <param name="channelId"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<BaseResponse> Archive(string channelId);
+
+        /// <summary>
         /// <a href="https://api.slack.com/methods/channels.info">Documentation</a>.
         /// </summary>
         /// <param name="channelId"></param>
