@@ -15,6 +15,14 @@ namespace Taut.Channels
         IObservable<BaseResponse> Archive(string channelId);
 
         /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.create">Documentation</a>.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<ChannelCreateResponse> Create(string name);
+
+        /// <summary>
         /// <a href="https://api.slack.com/methods/channels.info">Documentation</a>.
         /// </summary>
         /// <param name="channelId"></param>

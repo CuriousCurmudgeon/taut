@@ -16,6 +16,7 @@ namespace Taut.Test.Channels
     public class ChannelServiceTests : ApiServiceTestBase
     {
         private static BaseResponse OkChannelArchiveResponse;
+        private static ChannelCreateResponse OkChannelCreateResponse;
         private static ChannelInfoResponse OkChannelInfoResponse;
         private static ChannelListResponse OkChannelListResponse;
 
@@ -23,6 +24,7 @@ namespace Taut.Test.Channels
         public static void ClassInitialize(TestContext context)
         {
             OkChannelArchiveResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/channel_archive.json");
+            OkChannelCreateResponse = JsonLoader.LoadJson<ChannelCreateResponse>(@"Channels/Data/channel_create.json");
             OkChannelInfoResponse = JsonLoader.LoadJson<ChannelInfoResponse>(@"Channels/Data/channel_info.json");
             OkChannelListResponse = JsonLoader.LoadJson<ChannelListResponse>(@"Channels/Data/channel_list.json");
         }
@@ -45,6 +47,48 @@ namespace Taut.Test.Channels
             await ShouldHaveCalledTestHelperAsync(OkChannelArchiveResponse,
                 async service => await service.Archive("123").ToTask(),
                 "*channels.archive*channel=123");
+        }
+
+        #endregion
+
+        #region Archive
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenNameIsNull_ThenCreateThrowsArgumentNullException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Create(null);
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenNameIsEmpty_ThenCreateThrowsArgumentException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Create("");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenNameIsWhitespace_ThenCreateThrowsArgumentException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Create("   ");
+        }
+
+        [TestMethod]
+        public async Task WhenNameHasNonWhitespaceValue_ThenCreateIncludesNameInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelCreateResponse,
+                async service => await service.Create("test").ToTask(),
+                "*channels.create*name=test");
         }
 
         #endregion
