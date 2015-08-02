@@ -6,6 +6,7 @@ using System.Reactive.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Taut;
 using Taut.Authorizations;
 
 namespace Taut.Channels
@@ -14,6 +15,7 @@ namespace Taut.Channels
     {
         private const string ARCHIVE_METHOD = "channels.archive";
         private const string CREATE_METHOD = "channels.create";
+        private const string HISTORY_METHOD = "channels.history";
         private const string INFO_METHOD = "channels.info";
         private const string LIST_METHOD = "channels.list";
 
@@ -36,6 +38,24 @@ namespace Taut.Channels
             return ObservableApiCall(CREATE_METHOD,
                     new { name = name },
                     async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelCreateResponse>(requestUrl, cancellationToken));
+        }
+
+        public IObservable<ChannelHistoryResponse> History(string channelId, double? latest = null,
+            double? oldest = null, bool? isInclusive = null, int? count = null)
+        {
+            channelId.ThrowIfNull("channelId");
+
+            var queryParams = new Dictionary<string, object>
+            {
+                { "channel", channelId },
+                { "latest", latest },
+                { "oldest", oldest },
+                { "inclusive", isInclusive.ToInt32() },
+                { "count", count }
+            };
+
+            return ObservableApiCall(HISTORY_METHOD, queryParams,
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelHistoryResponse>(requestUrl, cancellationToken));
         }
 
         public IObservable<ChannelInfoResponse> Info(string channelId)

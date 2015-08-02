@@ -9,7 +9,6 @@ namespace Taut.Channels
         /// <summary>
         /// <a href="https://api.slack.com/methods/channels.archive">Documentation</a>.
         /// </summary>
-        /// <param name="channelId"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         IObservable<BaseResponse> Archive(string channelId);
@@ -17,15 +16,21 @@ namespace Taut.Channels
         /// <summary>
         /// <a href="https://api.slack.com/methods/channels.create">Documentation</a>.
         /// </summary>
-        /// <param name="name"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         IObservable<ChannelCreateResponse> Create(string name);
 
         /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.history">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException">Thrown if channelId is null</exception>
+        /// <returns></returns>
+        IObservable<ChannelHistoryResponse> History(string channelId, double? latest = null,
+            double? oldest = null, bool? isInclusive = null, int? count = null);
+
+        /// <summary>
         /// <a href="https://api.slack.com/methods/channels.info">Documentation</a>.
         /// </summary>
-        /// <param name="channelId"></param>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         IObservable<ChannelInfoResponse> Info(string channelId);
@@ -33,7 +38,6 @@ namespace Taut.Channels
         /// <summary>
         /// <a href="https://api.slack.com/methods/channels.list">Documentation</a>.
         /// </summary>
-        /// <param name="excludeArchived">Should archived channels be returned?</param>
         /// <returns></returns>
         IObservable<ChannelListResponse> List(bool excludeArchived = false);
     }

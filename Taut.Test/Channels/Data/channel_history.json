@@ -1,0 +1,12 @@
+﻿{
+    "ok": true,
+    "messages": [
+        {
+            "type": "message",
+            "user": "U0257FX4E",
+            "text": "slackbot help",
+            "ts": "1434553836.000013"
+        }
+    ],
+    "has_more": false
+}
