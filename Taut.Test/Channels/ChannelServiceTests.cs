@@ -15,19 +15,17 @@ namespace Taut.Test.Channels
     [TestClass]
     public class ChannelServiceTests : ApiServiceTestBase
     {
+        private static ChannelResponse OkChannelResponse;
         private static BaseResponse OkChannelArchiveResponse;
-        private static ChannelCreateResponse OkChannelCreateResponse;
         private static ChannelHistoryResponse OkChannelHistoryResponse;
-        private static ChannelInfoResponse OkChannelInfoResponse;
         private static ChannelListResponse OkChannelListResponse;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
+            OkChannelResponse = JsonLoader.LoadJson<ChannelResponse>(@"Channels/Data/channel_info.json");
             OkChannelArchiveResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/channel_archive.json");
-            OkChannelCreateResponse = JsonLoader.LoadJson<ChannelCreateResponse>(@"Channels/Data/channel_create.json");
             OkChannelHistoryResponse = JsonLoader.LoadJson<ChannelHistoryResponse>(@"Channels/Data/channel_history.json");
-            OkChannelInfoResponse = JsonLoader.LoadJson<ChannelInfoResponse>(@"Channels/Data/channel_info.json");
             OkChannelListResponse = JsonLoader.LoadJson<ChannelListResponse>(@"Channels/Data/channel_list.json");
         }
 
@@ -88,7 +86,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenNameHasNonWhitespaceValue_ThenCreateIncludesNameInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelCreateResponse,
+            await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
                 async service => await service.Create("test").ToTask(),
                 "*channels.create*name=test");
         }
@@ -216,9 +214,49 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenChannelIdHasValue_ThenInfoIncludesChannelIdInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelInfoResponse,
+            await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
                 async service => await service.Info("123").ToTask(),
                 "*channels.info*channel=123");
+        }
+
+        #endregion
+
+        #region Invite
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenInviteThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Invite(null, "456");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenUserIdIsNull_ThenInviteThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Invite("123", null);
+        }
+
+        [TestMethod]
+        public async Task WhenRequiredParamsHaveValues_ThenInfoIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
+                async service => await service.Invite("123", "456").ToTask(),
+                "*channels.invite*channel=123");
+        }
+
+        [TestMethod]
+        public async Task WhenRequiredParamsHaveValues_ThenInfoIncludesUserIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
+                async service => await service.Invite("123", "456").ToTask(),
+                "*channels.invite*user=456");
         }
 
         #endregion

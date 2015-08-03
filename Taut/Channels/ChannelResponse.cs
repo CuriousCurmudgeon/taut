@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taut.Channels
 {
-    public class ChannelCreateResponse : BaseResponse
+    public class ChannelResponse : BaseResponse
     {
         public Channel Channel { get; set; }
     }

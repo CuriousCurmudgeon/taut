@@ -17,6 +17,7 @@ namespace Taut.Channels
         private const string CREATE_METHOD = "channels.create";
         private const string HISTORY_METHOD = "channels.history";
         private const string INFO_METHOD = "channels.info";
+        private const string INVITE_METHOD = "channels.invite";
         private const string LIST_METHOD = "channels.list";
 
         public ChannelService(IUserCredentialService userCredentialService)
@@ -31,13 +32,13 @@ namespace Taut.Channels
                     async (requestUrl, cancellationToken) => await GetResponseAsync<BaseResponse>(requestUrl, cancellationToken));
         }
 
-        public IObservable<ChannelCreateResponse> Create(string name)
+        public IObservable<ChannelResponse> Create(string name)
         {
             name.ThrowIfNullOrEmpty("name");
 
             return ObservableApiCall(CREATE_METHOD,
                     new { name = name },
-                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelCreateResponse>(requestUrl, cancellationToken));
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelResponse>(requestUrl, cancellationToken));
         }
 
         public IObservable<ChannelHistoryResponse> History(string channelId, double? latest = null,
@@ -58,13 +59,23 @@ namespace Taut.Channels
                     async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelHistoryResponse>(requestUrl, cancellationToken));
         }
 
-        public IObservable<ChannelInfoResponse> Info(string channelId)
+        public IObservable<ChannelResponse> Info(string channelId)
         {
             channelId.ThrowIfNull("channelId");
 
             return ObservableApiCall(INFO_METHOD,
                     new { channel = channelId },
-                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelInfoResponse>(requestUrl, cancellationToken));
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelResponse>(requestUrl, cancellationToken));
+        }
+
+        public IObservable<ChannelResponse> Invite(string channelId, string userId)
+        {
+            channelId.ThrowIfNull("channelId");
+            userId.ThrowIfNull("userId");
+
+            return ObservableApiCall(INVITE_METHOD,
+                    new { channel = channelId, user = userId },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelResponse>(requestUrl, cancellationToken));
         }
 
         public IObservable<ChannelListResponse> List(bool excludeArchived = false)

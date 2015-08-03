@@ -18,7 +18,7 @@ namespace Taut.Channels
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        IObservable<ChannelCreateResponse> Create(string name);
+        IObservable<ChannelResponse> Create(string name);
 
         /// <summary>
         /// <a href="https://api.slack.com/methods/channels.history">Documentation</a>.
@@ -33,7 +33,15 @@ namespace Taut.Channels
         /// </summary>
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
-        IObservable<ChannelInfoResponse> Info(string channelId);
+        IObservable<ChannelResponse> Info(string channelId);
+
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.invite">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<ChannelResponse> Invite(string channelId, string userId);
+
 
         /// <summary>
         /// <a href="https://api.slack.com/methods/channels.list">Documentation</a>.
