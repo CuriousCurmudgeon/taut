@@ -50,6 +50,13 @@ namespace Taut.Channels
         IObservable<ChannelResponse> Join(string name);
 
         /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.kick">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<BaseResponse> Kick(string channelId, string userId);
+
+        /// <summary>
         /// <a href="https://api.slack.com/methods/channels.list">Documentation</a>.
         /// </summary>
         /// <returns></returns>

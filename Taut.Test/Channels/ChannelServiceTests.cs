@@ -244,7 +244,7 @@ namespace Taut.Test.Channels
         }
 
         [TestMethod]
-        public async Task WhenRequiredParamsHaveValues_ThenInfoIncludesChannelIdInParams()
+        public async Task WhenRequiredParamsHaveValues_ThenInviteIncludesChannelIdInParams()
         {
             await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
                 async service => await service.Invite("123", "456").ToTask(),
@@ -252,7 +252,7 @@ namespace Taut.Test.Channels
         }
 
         [TestMethod]
-        public async Task WhenRequiredParamsHaveValues_ThenInfoIncludesUserIdInParams()
+        public async Task WhenRequiredParamsHaveValues_ThenInviteIncludesUserIdInParams()
         {
             await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
                 async service => await service.Invite("123", "456").ToTask(),
@@ -345,6 +345,46 @@ namespace Taut.Test.Channels
             await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
                 async service => await service.Join("test").ToTask(),
                 "*channels.join*name=test");
+        }
+
+        #endregion
+
+        #region Kick
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenKickThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Kick(null, "456");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenUserIdIsNull_ThenKickThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Kick("123", null);
+        }
+
+        [TestMethod]
+        public async Task WhenRequiredParamsHaveValues_ThenKickIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
+                async service => await service.Kick("123", "456").ToTask(),
+                "*channels.kick*channel=123");
+        }
+
+        [TestMethod]
+        public async Task WhenRequiredParamsHaveValues_ThenKickIncludesUserIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
+                async service => await service.Kick("123", "456").ToTask(),
+                "*channels.kick*user=456");
         }
 
         #endregion
