@@ -16,16 +16,18 @@ namespace Taut.Test.Channels
     public class ChannelServiceTests : ApiServiceTestBase
     {
         private static ChannelResponse OkChannelResponse;
-        private static BaseResponse OkChannelArchiveResponse;
+        private static BaseResponse OkBaseResponse;
         private static ChannelHistoryResponse OkChannelHistoryResponse;
+        private static ChannelLeaveResponse OkChannelLeaveResponse;
         private static ChannelListResponse OkChannelListResponse;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
             OkChannelResponse = JsonLoader.LoadJson<ChannelResponse>(@"Channels/Data/channel_info.json");
-            OkChannelArchiveResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/channel_archive.json");
+            OkBaseResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/base.json");
             OkChannelHistoryResponse = JsonLoader.LoadJson<ChannelHistoryResponse>(@"Channels/Data/channel_history.json");
+            OkChannelLeaveResponse = JsonLoader.LoadJson<ChannelLeaveResponse>(@"Channels/Data/channel_leave.json");
             OkChannelListResponse = JsonLoader.LoadJson<ChannelListResponse>(@"Channels/Data/channel_list.json");
         }
 
@@ -44,7 +46,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenChannelIdHasValue_ThenArchiveIncludesChannelIdInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelArchiveResponse,
+            await ShouldHaveCalledTestHelperAsync(OkBaseResponse,
                 async service => await service.Archive("123").ToTask(),
                 "*channels.archive*channel=123");
         }
@@ -261,53 +263,7 @@ namespace Taut.Test.Channels
 
         #endregion
 
-        #region List
-
-        [TestMethod]
-        public async Task WhenExcludeArchivedIsDefault_ThenListParamsSetExcludeArchivedTo0()
-        {
-            await ShouldHaveCalledTestHelperAsync(OkChannelListResponse,
-                async service => await service.List().ToTask(),
-                "*channels.list*exclude_archived=0");
-        }
-
-        [TestMethod]
-        public async Task WhenExcludeArchivedIsFalse_ThenListParamsSetExcludeArchivedTo0()
-        {
-            await ShouldHaveCalledTestHelperAsync(OkChannelListResponse,
-                async service => await service.List(excludeArchived: false).ToTask(),
-                "*channels.list*exclude_archived=0");
-        }
-
-        [TestMethod]
-        public async Task WhenExcludeArchivedIsTrue_ThenListParamsSetExcludeArchivedTo1()
-        {
-            await ShouldHaveCalledTestHelperAsync(OkChannelListResponse,
-                async service => await service.List(excludeArchived: true).ToTask(),
-                "*channels.list*exclude_archived=1");
-        }
-
-        private async Task ShouldHaveCalledTestHelperAsync<T>(T response, Func<IChannelService, Task<T>> action,
-            string shouldHaveCalled)
-        {
-            // Arrange
-            var service = BuildChannelService();
-            HttpTest.RespondWithJson(response);
-            SetAuthorizedUserExpectations();
-
-            // Act
-            var result = await action.Invoke(service);
-
-            // Assert
-            HttpTest.ShouldHaveCalled(shouldHaveCalled)
-                .WithVerb(HttpMethod.Get)
-                .Times(1);
-        }
-
-
-        #endregion
-
-        #region Name
+        #region Join
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void WhenNameIsNull_ThenJoinThrowsArgumentNullException()
@@ -385,6 +341,114 @@ namespace Taut.Test.Channels
             await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
                 async service => await service.Kick("123", "456").ToTask(),
                 "*channels.kick*user=456");
+        }
+
+        #endregion
+
+        #region Leave
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenLeaveThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Leave(null);
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenLeaveIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelLeaveResponse,
+                async service => await service.Leave("123").ToTask(),
+                "*channels.leave*channel=123");
+        }
+
+        #endregion
+
+        #region List
+
+        [TestMethod]
+        public async Task WhenExcludeArchivedIsDefault_ThenListParamsSetExcludeArchivedTo0()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelListResponse,
+                async service => await service.List().ToTask(),
+                "*channels.list*exclude_archived=0");
+        }
+
+        [TestMethod]
+        public async Task WhenExcludeArchivedIsFalse_ThenListParamsSetExcludeArchivedTo0()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelListResponse,
+                async service => await service.List(excludeArchived: false).ToTask(),
+                "*channels.list*exclude_archived=0");
+        }
+
+        [TestMethod]
+        public async Task WhenExcludeArchivedIsTrue_ThenListParamsSetExcludeArchivedTo1()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelListResponse,
+                async service => await service.List(excludeArchived: true).ToTask(),
+                "*channels.list*exclude_archived=1");
+        }
+
+        private async Task ShouldHaveCalledTestHelperAsync<T>(T response, Func<IChannelService, Task<T>> action,
+            string shouldHaveCalled)
+        {
+            // Arrange
+            var service = BuildChannelService();
+            HttpTest.RespondWithJson(response);
+            SetAuthorizedUserExpectations();
+
+            // Act
+            var result = await action.Invoke(service);
+
+            // Assert
+            HttpTest.ShouldHaveCalled(shouldHaveCalled)
+                .WithVerb(HttpMethod.Get)
+                .Times(1);
+        }
+
+
+        #endregion
+
+        #region Mark
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenMarkThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Mark(null, DateTime.Now.ToUtcUnixTimestamp());
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenTimestampIsZero_ThenMarkThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Mark("123", 0);
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenMarkIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkBaseResponse,
+                async service => await service.Mark("123", 123.45).ToTask(),
+                "*channels.mark*channel=123");
+        }
+
+        [TestMethod]
+        public async Task WhenTimestampHasValue_ThenMarkIncludesTSInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkBaseResponse,
+                async service => await service.Mark("123", 123.45).ToTask(),
+                "*channels.mark*ts=123.45");
         }
 
         #endregion

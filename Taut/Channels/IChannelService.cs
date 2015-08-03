@@ -57,9 +57,23 @@ namespace Taut.Channels
         IObservable<BaseResponse> Kick(string channelId, string userId);
 
         /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.leave">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<ChannelLeaveResponse> Leave(string channelId);
+
+        /// <summary>
         /// <a href="https://api.slack.com/methods/channels.list">Documentation</a>.
         /// </summary>
         /// <returns></returns>
         IObservable<ChannelListResponse> List(bool excludeArchived = false);
+
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.mark">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<BaseResponse> Mark(string channelId, double timestamp);
     }
 }

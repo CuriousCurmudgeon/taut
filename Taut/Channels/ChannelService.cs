@@ -20,7 +20,9 @@ namespace Taut.Channels
         private const string INVITE_METHOD = "channels.invite";
         private const string JOIN_METHOD = "channels.join";
         private const string KICK_METHOD = "channels.kick";
+        private const string LEAVE_METHOD = "channels.leave";
         private const string LIST_METHOD = "channels.list";
+        private const string MARK_METHOD = "channels.mark";
 
         public ChannelService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
@@ -99,11 +101,33 @@ namespace Taut.Channels
                     async (requestUrl, cancellationToken) => await GetResponseAsync<BaseResponse>(requestUrl, cancellationToken));
         }
 
+        public IObservable<ChannelLeaveResponse> Leave(string channelId)
+        {
+            channelId.ThrowIfNull("channelId");
+
+            return ObservableApiCall(LEAVE_METHOD,
+                    new { channel = channelId },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelLeaveResponse>(requestUrl, cancellationToken));
+        }
+
         public IObservable<ChannelListResponse> List(bool excludeArchived = false)
         {
             return ObservableApiCall(LIST_METHOD,
                     new { exclude_archived = Convert.ToInt32(excludeArchived) },
                     async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelListResponse>(requestUrl, cancellationToken));
+        }
+
+        public IObservable<BaseResponse> Mark(string channelId, double timestamp)
+        {
+            channelId.ThrowIfNull("channelId");
+            if(Math.Abs(timestamp - 0) <= double.Epsilon)
+            {
+                throw new ArgumentException("timestamp cannot be 0", "timestamp");
+            }
+
+            return ObservableApiCall(MARK_METHOD,
+                    new { channel = channelId, ts = timestamp },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<BaseResponse>(requestUrl, cancellationToken));
         }
     }
 }
