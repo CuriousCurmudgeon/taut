@@ -307,6 +307,48 @@ namespace Taut.Test.Channels
 
         #endregion
 
+        #region Name
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenNameIsNull_ThenJoinThrowsArgumentNullException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Join(null);
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenNameIsEmpty_ThenJoinThrowsArgumentException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Join("");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenNameIsWhitespace_ThenJoinThrowsArgumentException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Join("   ");
+        }
+
+        [TestMethod]
+        public async Task WhenNameHasNonWhitespaceValue_ThenJoinIncludesNameInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
+                async service => await service.Join("test").ToTask(),
+                "*channels.join*name=test");
+        }
+
+        #endregion
+
         #region Test Helpers
 
         private ChannelService BuildChannelService()

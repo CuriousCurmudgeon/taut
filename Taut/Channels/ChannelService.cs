@@ -18,6 +18,7 @@ namespace Taut.Channels
         private const string HISTORY_METHOD = "channels.history";
         private const string INFO_METHOD = "channels.info";
         private const string INVITE_METHOD = "channels.invite";
+        private const string JOIN_METHOD = "channels.join";
         private const string LIST_METHOD = "channels.list";
 
         public ChannelService(IUserCredentialService userCredentialService)
@@ -75,6 +76,15 @@ namespace Taut.Channels
 
             return ObservableApiCall(INVITE_METHOD,
                     new { channel = channelId, user = userId },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelResponse>(requestUrl, cancellationToken));
+        }
+
+        public IObservable<ChannelResponse> Join(string name)
+        {
+            name.ThrowIfNullOrEmpty("name");
+
+            return ObservableApiCall(JOIN_METHOD,
+                    new { name = name },
                     async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelResponse>(requestUrl, cancellationToken));
         }
 

@@ -42,6 +42,12 @@ namespace Taut.Channels
         /// <returns></returns>
         IObservable<ChannelResponse> Invite(string channelId, string userId);
 
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.join">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<ChannelResponse> Join(string name);
 
         /// <summary>
         /// <a href="https://api.slack.com/methods/channels.list">Documentation</a>.
