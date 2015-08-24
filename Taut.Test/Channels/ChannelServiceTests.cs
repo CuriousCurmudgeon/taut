@@ -607,6 +607,28 @@ namespace Taut.Test.Channels
 
         #endregion
 
+        #region Unarchive
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenUnarchiveThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Unarchive(null);
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenUnarchiveIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkBaseResponse,
+                async service => await service.Unarchive("123").ToTask(),
+                "*channels.unarchive*channel=123");
+        }
+
+        #endregion
+
         #region Test Helpers
 
         private ChannelService BuildChannelService()

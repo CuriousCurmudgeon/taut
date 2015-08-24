@@ -96,5 +96,12 @@ namespace Taut.Channels
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         IObservable<ChannelSetTopicResponse> SetTopic(string channelId, string purpose);
+
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.unarchive">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<BaseResponse> Unarchive(string channelId);
     }
 }

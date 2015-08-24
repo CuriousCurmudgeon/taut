@@ -26,6 +26,7 @@ namespace Taut.Channels
         private const string RENAME_METHOD = "channels.rename";
         private const string SET_PURPOSE_METHOD = "channels.setPurpose";
         private const string SET_TOPIC_METHOD = "channels.setTopic";
+        private const string UNARCHIVE_METHOD = "channels.unarchive";
 
         public ChannelService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
@@ -161,6 +162,15 @@ namespace Taut.Channels
             return ObservableApiCall(SET_TOPIC_METHOD,
                     new { channel = channelId, topic = topic },
                     async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelSetTopicResponse>(requestUrl, cancellationToken));
+        }
+
+        public IObservable<BaseResponse> Unarchive(string channelId)
+        {
+            channelId.ThrowIfNull("channelId");
+
+            return ObservableApiCall(UNARCHIVE_METHOD,
+                    new { channel = channelId },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<BaseResponse>(requestUrl, cancellationToken));
         }
     }
 }
