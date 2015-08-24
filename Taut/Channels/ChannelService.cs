@@ -25,6 +25,7 @@ namespace Taut.Channels
         private const string MARK_METHOD = "channels.mark";
         private const string RENAME_METHOD = "channels.rename";
         private const string SET_PURPOSE_METHOD = "channels.setPurpose";
+        private const string SET_TOPIC_METHOD = "channels.setTopic";
 
         public ChannelService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
@@ -145,11 +146,21 @@ namespace Taut.Channels
         public IObservable<ChannelSetPurposeResponse> SetPurpose(string channelId, string purpose)
         {
             channelId.ThrowIfNull("channelId");
-            purpose.ThrowIfNullOrEmpty("name");
+            purpose.ThrowIfNullOrEmpty("purpose");
 
             return ObservableApiCall(SET_PURPOSE_METHOD,
                     new { channel = channelId, purpose = purpose },
                     async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelSetPurposeResponse>(requestUrl, cancellationToken));
+        }
+
+        public IObservable<ChannelSetTopicResponse> SetTopic(string channelId, string topic)
+        {
+            channelId.ThrowIfNull("channelId");
+            topic.ThrowIfNullOrEmpty("topic");
+
+            return ObservableApiCall(SET_TOPIC_METHOD,
+                    new { channel = channelId, topic = topic },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelSetTopicResponse>(requestUrl, cancellationToken));
         }
     }
 }

@@ -138,6 +138,9 @@
     <Content Include="Channels\Data\channel_setPurpose.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Channels\Data\channel_setTopic.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Users\Data\users_list.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

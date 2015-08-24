@@ -21,6 +21,7 @@ namespace Taut.Test.Channels
         private static ChannelLeaveResponse OkChannelLeaveResponse;
         private static ChannelListResponse OkChannelListResponse;
         private static ChannelSetPurposeResponse OkChannelSetPurposeResponse;
+        private static ChannelSetTopicResponse OkChannelSetTopicResponse;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
@@ -31,6 +32,7 @@ namespace Taut.Test.Channels
             OkChannelLeaveResponse = JsonLoader.LoadJson<ChannelLeaveResponse>(@"Channels/Data/channel_leave.json");
             OkChannelListResponse = JsonLoader.LoadJson<ChannelListResponse>(@"Channels/Data/channel_list.json");
             OkChannelSetPurposeResponse = JsonLoader.LoadJson<ChannelSetPurposeResponse>(@"Channels/Data/channel_setPurpose.json");
+            OkChannelSetTopicResponse = JsonLoader.LoadJson<ChannelSetTopicResponse>(@"Channels/Data/channel_setTopic.json");
         }
 
         #region Archive
@@ -505,7 +507,7 @@ namespace Taut.Test.Channels
 
         #endregion
 
-        #region Rename
+        #region SetPurpose
 
         [TestMethod, ExpectedException(typeof(ArgumentNullException))]
         public void WhenChannelIdIsNull_ThenSetPurposeThrowsException()
@@ -551,6 +553,56 @@ namespace Taut.Test.Channels
             await ShouldHaveCalledTestHelperAsync(OkChannelSetPurposeResponse,
                 async service => await service.SetPurpose("123", "purpose").ToTask(),
                 "*channels.setPurpose*purpose=purpose");
+        }
+
+        #endregion
+
+        #region SetTopic
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenSetTopicThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.SetTopic(null, "Topic");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenTopicIsNull_ThenSetTopicThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.SetTopic("123", null);
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenTopicIsEmpty_ThenSetTopicThrowsArgumentException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.SetTopic("123", "");
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenSetTopicIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelSetTopicResponse,
+                async service => await service.SetTopic("123", "Topic").ToTask(),
+                "*channels.setTopic*channel=123");
+        }
+
+        [TestMethod]
+        public async Task WhenTopicHasValue_ThenSetTopicIncludesTopicInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelSetTopicResponse,
+                async service => await service.SetTopic("123", "Topic").ToTask(),
+                "*channels.setTopic*topic=Topic");
         }
 
         #endregion
