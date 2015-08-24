@@ -23,6 +23,7 @@ namespace Taut.Channels
         private const string LEAVE_METHOD = "channels.leave";
         private const string LIST_METHOD = "channels.list";
         private const string MARK_METHOD = "channels.mark";
+        private const string RENAME_METHOD = "channels.rename";
 
         public ChannelService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
@@ -128,6 +129,16 @@ namespace Taut.Channels
             return ObservableApiCall(MARK_METHOD,
                     new { channel = channelId, ts = timestamp },
                     async (requestUrl, cancellationToken) => await GetResponseAsync<BaseResponse>(requestUrl, cancellationToken));
+        }
+
+        public IObservable<ChannelResponse> Rename(string channelId, string name)
+        {
+            channelId.ThrowIfNull("channelId");
+            name.ThrowIfNullOrEmpty("name");
+
+            return ObservableApiCall(RENAME_METHOD,
+                    new { channel = channelId, name = name },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelResponse>(requestUrl, cancellationToken));
         }
     }
 }

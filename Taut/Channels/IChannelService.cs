@@ -75,5 +75,12 @@ namespace Taut.Channels
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         IObservable<BaseResponse> Mark(string channelId, double timestamp);
+
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.rename">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<ChannelResponse> Rename(string channelId, string name);
     }
 }

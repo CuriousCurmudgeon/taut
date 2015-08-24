@@ -453,6 +453,56 @@ namespace Taut.Test.Channels
 
         #endregion
 
+        #region Rename
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenRenameThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Rename(null, "new_name");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenNameIsNull_ThenRenameThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Rename("123", null);
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenNameIsEmpty_ThenRenameThrowsArgumentException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.Rename("123", "");
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenRenameIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
+                async service => await service.Rename("123", "new_name").ToTask(),
+                "*channels.rename*channel=123");
+        }
+
+        [TestMethod]
+        public async Task WhenNameHasValue_ThenRenameIncludesNameInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
+                async service => await service.Rename("123", "new_name").ToTask(),
+                "*channels.rename*name=new_name");
+        }
+
+        #endregion
+
         #region Test Helpers
 
         private ChannelService BuildChannelService()
