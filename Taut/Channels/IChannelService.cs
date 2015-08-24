@@ -82,5 +82,12 @@ namespace Taut.Channels
         /// <exception cref="ArgumentNullException"></exception>
         /// <returns></returns>
         IObservable<ChannelResponse> Rename(string channelId, string name);
+
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/channels.setPurpose">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<ChannelSetPurposeResponse> SetPurpose(string channelId, string purpose);
     }
 }

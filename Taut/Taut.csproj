@@ -43,6 +43,7 @@
     <Compile Include="Channels\Channel.cs" />
     <Compile Include="Channels\ChannelHistoryResponse.cs" />
     <Compile Include="Channels\ChannelLeaveResponse.cs" />
+    <Compile Include="Channels\ChannelSetPurposeResponse.cs" />
     <Compile Include="Channels\ChannelResponse.cs" />
     <Compile Include="Channels\ChannelListResponse.cs" />
     <Compile Include="Channels\ChannelService.cs" />

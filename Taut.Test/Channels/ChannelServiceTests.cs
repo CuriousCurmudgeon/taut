@@ -20,6 +20,7 @@ namespace Taut.Test.Channels
         private static ChannelHistoryResponse OkChannelHistoryResponse;
         private static ChannelLeaveResponse OkChannelLeaveResponse;
         private static ChannelListResponse OkChannelListResponse;
+        private static ChannelSetPurposeResponse OkChannelSetPurposeResponse;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
@@ -29,6 +30,7 @@ namespace Taut.Test.Channels
             OkChannelHistoryResponse = JsonLoader.LoadJson<ChannelHistoryResponse>(@"Channels/Data/channel_history.json");
             OkChannelLeaveResponse = JsonLoader.LoadJson<ChannelLeaveResponse>(@"Channels/Data/channel_leave.json");
             OkChannelListResponse = JsonLoader.LoadJson<ChannelListResponse>(@"Channels/Data/channel_list.json");
+            OkChannelSetPurposeResponse = JsonLoader.LoadJson<ChannelSetPurposeResponse>(@"Channels/Data/channel_setPurpose.json");
         }
 
         #region Archive
@@ -499,6 +501,56 @@ namespace Taut.Test.Channels
             await ShouldHaveCalledTestHelperAsync(OkChannelResponse,
                 async service => await service.Rename("123", "new_name").ToTask(),
                 "*channels.rename*name=new_name");
+        }
+
+        #endregion
+
+        #region Rename
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenSetPurposeThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.SetPurpose(null, "purpose");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenPurposeIsNull_ThenSetPurposeThrowsException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.SetPurpose("123", null);
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenPurposeIsEmpty_ThenSetPurposeThrowsArgumentException()
+        {
+            // Arrange
+            var service = BuildChannelService();
+
+            // Act
+            service.SetPurpose("123", "");
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenSetPurposeIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelSetPurposeResponse,
+                async service => await service.SetPurpose("123", "purpose").ToTask(),
+                "*channels.setPurpose*channel=123");
+        }
+
+        [TestMethod]
+        public async Task WhenPurposeHasValue_ThenSetPurposeIncludesPurposeInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChannelSetPurposeResponse,
+                async service => await service.SetPurpose("123", "purpose").ToTask(),
+                "*channels.setPurpose*purpose=purpose");
         }
 
         #endregion
