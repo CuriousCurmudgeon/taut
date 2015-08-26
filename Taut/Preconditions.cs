@@ -23,5 +23,13 @@ namespace Taut
                 throw new ArgumentException(name);
             }
         }
+
+        public static void ThrowIfZero(this double value, string name)
+        {
+            if(value == 0)
+            {
+                throw new ArgumentException(name);
+            }
+        }
     }
 }

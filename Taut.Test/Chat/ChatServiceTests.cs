@@ -14,13 +14,55 @@ namespace Taut.Test.Chat
     [TestClass]
     public class ChatServiceTests : ApiServiceTestBase
     {
+        private static ChatDeleteResponse OkChatDeleteResponse;
         private static ChatPostMessageResponse OkChatPostMessageResponse;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
+            OkChatDeleteResponse = JsonLoader.LoadJson<ChatDeleteResponse>(@"Chat/Data/chat_delete.json");
             OkChatPostMessageResponse = JsonLoader.LoadJson<ChatPostMessageResponse>(@"Chat/Data/chat_post_message.json");
         }
+
+        #region Delete
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenDeleteThrowsException()
+        {
+            // Arrange
+            var service = BuildChatService();
+
+            // Act
+            service.Delete(123, null);
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenTimestampIsZero_ThenDeleteThrowsException()
+        {
+            // Arrange
+            var service = BuildChatService();
+
+            // Act
+            service.Delete(0, "123");
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenDeleteIncludesChannelInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatDeleteResponse,
+                async service => await service.Delete(123, "456").ToTask(),
+                "*chat.delete*channel=456");
+        }
+
+        [TestMethod]
+        public async Task WhenTimestampIsNotZero_ThenDeleteIncludesTSInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatDeleteResponse,
+                async service => await service.Delete(123, "456").ToTask(),
+                "*chat.delete*ts=123");
+        }
+
+        #endregion
 
         #region PostMessage
 

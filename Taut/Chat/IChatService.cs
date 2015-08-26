@@ -17,6 +17,18 @@ namespace Taut.Chat
 
     public interface IChatService
     {
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/chat.delete">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<ChatDeleteResponse> Delete(double timestamp, string channelId);
+
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/chat.postMessage">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
         IObservable<ChatPostMessageResponse> PostMessage(string channelId, string text,
             string username = null, bool? asUser = null, ParseMode parse = ParseMode.Default,
             bool? linkNames = null, bool? unfurlLinks = null, bool? unfurlMedia = null,

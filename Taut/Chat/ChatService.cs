@@ -9,10 +9,21 @@ namespace Taut.Chat
 {
     public class ChatService : BaseAuthenticatedApiService, IChatService
     {
+        private const string DELETE_METHOD = "chat.delete";
         private const string POST_MESSAGE_METHOD = "chat.postMessage";
 
         public ChatService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
+
+        public IObservable<ChatDeleteResponse> Delete(double timestamp, string channelId)
+        {
+            timestamp.ThrowIfZero("timestamp");
+            channelId.ThrowIfNull("channelId");
+
+            return ObservableApiCall(DELETE_METHOD,
+                    new { ts = timestamp, channel = channelId},
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChatDeleteResponse>(requestUrl, cancellationToken));
+        }
 
         public IObservable<ChatPostMessageResponse> PostMessage(string channelId, string text,
             string username = null, bool? asUser = null, ParseMode parse = ParseMode.Default,
