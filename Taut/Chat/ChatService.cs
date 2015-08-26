@@ -11,6 +11,7 @@ namespace Taut.Chat
     {
         private const string DELETE_METHOD = "chat.delete";
         private const string POST_MESSAGE_METHOD = "chat.postMessage";
+        private const string UPDATE_METHOD = "chat.update";
 
         public ChatService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
@@ -64,6 +65,17 @@ namespace Taut.Chat
 
             return ObservableApiCall(POST_MESSAGE_METHOD, queryParams,
                     async (requestUrl, cancellationToken) => await GetResponseAsync<ChatPostMessageResponse>(requestUrl, cancellationToken));
+        }
+
+        public IObservable<ChatUpdateResponse> Update(double timestamp, string channelId, string text)
+        {
+            timestamp.ThrowIfZero("timestamp");
+            channelId.ThrowIfNull("channelId");
+            text.ThrowIfNullOrEmpty("text");
+
+            return ObservableApiCall(UPDATE_METHOD,
+                    new { ts = timestamp, channel = channelId, text = text },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChatUpdateResponse>(requestUrl, cancellationToken));
         }
     }
 }

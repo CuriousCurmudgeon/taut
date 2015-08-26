@@ -16,12 +16,14 @@ namespace Taut.Test.Chat
     {
         private static ChatDeleteResponse OkChatDeleteResponse;
         private static ChatPostMessageResponse OkChatPostMessageResponse;
+        private static ChatUpdateResponse OkChatUpdateResponse;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
             OkChatDeleteResponse = JsonLoader.LoadJson<ChatDeleteResponse>(@"Chat/Data/chat_delete.json");
             OkChatPostMessageResponse = JsonLoader.LoadJson<ChatPostMessageResponse>(@"Chat/Data/chat_post_message.json");
+            OkChatUpdateResponse = JsonLoader.LoadJson<ChatUpdateResponse>(@"Chat/Data/chat_update.json");
         }
 
         #region Delete
@@ -341,6 +343,64 @@ namespace Taut.Test.Chat
         }
 
         #endregion
+
+        #endregion
+
+        #region Update
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenUpdateThrowsException()
+        {
+            // Arrange
+            var service = BuildChatService();
+
+            // Act
+            service.Update(123, null, "update text");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenTimestampIsZero_ThenUpdateThrowsException()
+        {
+            // Arrange
+            var service = BuildChatService();
+
+            // Act
+            service.Update(0, "123", "update text");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenTextIsNull_ThenUpdateThrowsException()
+        {
+            // Arrange
+            var service = BuildChatService();
+
+            // Act
+            service.Update(123, "456", null);
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenUpdateIncludesChannelInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatUpdateResponse,
+                async service => await service.Update(123, "456", "update text").ToTask(),
+                "*chat.update*channel=456");
+        }
+
+        [TestMethod]
+        public async Task WhenTimestampIsNotZero_ThenUpdateIncludesTSInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatUpdateResponse,
+                async service => await service.Update(123, "456", "update text").ToTask(),
+                "*chat.update*ts=123");
+        }
+
+        [TestMethod]
+        public async Task WhenTextIsNotNull_ThenUpdateIncludesTextInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkChatUpdateResponse,
+                async service => await service.Update(123, "456", "update text").ToTask(),
+                "*chat.update*text=update%20text");
+        }
 
         #endregion
 

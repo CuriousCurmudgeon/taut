@@ -33,5 +33,12 @@ namespace Taut.Chat
             string username = null, bool? asUser = null, ParseMode parse = ParseMode.Default,
             bool? linkNames = null, bool? unfurlLinks = null, bool? unfurlMedia = null,
             Uri iconUrl = null, string iconEmoji = null, IEnumerable<Attachment> attachments = null);
+
+        /// <summary>
+        /// <a href="https://api.slack.com/methods/chat.update">Documentation</a>.
+        /// </summary>
+        /// <exception cref="ArgumentNullException"></exception>
+        /// <returns></returns>
+        IObservable<ChatUpdateResponse> Update(double timestamp, string channelId, string text);
     }
 }
