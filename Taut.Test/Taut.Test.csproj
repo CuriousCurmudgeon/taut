@@ -97,6 +97,7 @@
     <Compile Include="Channels\ChannelServiceTests.cs" />
     <Compile Include="Chat\ChatServiceTests.cs" />
     <Compile Include="Emoji\EmojiServiceTests.cs" />
+    <Compile Include="Files\FileServiceTests.cs" />
     <Compile Include="IMs\DirectMessageChannelServiceTests.cs" />
     <Compile Include="JsonLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -161,6 +162,9 @@
       <Project>{9cf85238-539b-4986-b8d0-ca8413afba91}</Project>
       <Name>Taut</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Files\Data\" />
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
