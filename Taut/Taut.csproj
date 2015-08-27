@@ -55,6 +55,9 @@
     <Compile Include="Chat\ChatService.cs" />
     <Compile Include="Chat\IChatService.cs" />
     <Compile Include="DateExtensions.cs" />
+    <Compile Include="Emoji\EmojiListResponse.cs" />
+    <Compile Include="Emoji\EmojiService.cs" />
+    <Compile Include="Emoji\IEmojiService.cs" />
     <Compile Include="IAuthenticatedService.cs" />
     <Compile Include="IMs\DirectMessageChannel.cs" />
     <Compile Include="IMs\DirectMessageChannelListResponse.cs" />

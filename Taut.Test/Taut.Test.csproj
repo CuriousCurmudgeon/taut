@@ -96,6 +96,7 @@
     <Compile Include="BaseAuthenticatedApiServiceTests.cs" />
     <Compile Include="Channels\ChannelServiceTests.cs" />
     <Compile Include="Chat\ChatServiceTests.cs" />
+    <Compile Include="Emoji\EmojiServiceTests.cs" />
     <Compile Include="IMs\DirectMessageChannelServiceTests.cs" />
     <Compile Include="JsonLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -145,6 +146,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Chat\Data\chat_update.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Emoji\Data\emoji_list.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <None Include="packages.config" />
