@@ -22,5 +22,10 @@ namespace Taut.Files
                     new { file = fileId },
                     async (requestUrl, cancellationToken) => await GetResponseAsync<BaseResponse>(requestUrl, cancellationToken));
         }
+
+        public IObservable<FileInfoResponse> Info(string fileId, int? count = default(int?), int? page = default(int?))
+        {
+            throw new NotImplementedException();
+        }
     }
 }

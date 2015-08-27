@@ -58,8 +58,12 @@
     <Compile Include="Emoji\EmojiListResponse.cs" />
     <Compile Include="Emoji\EmojiService.cs" />
     <Compile Include="Emoji\IEmojiService.cs" />
+    <Compile Include="Files\FileComment.cs" />
+    <Compile Include="Files\File.cs" />
+    <Compile Include="Files\FileInfoResponse.cs" />
     <Compile Include="Files\FileService.cs" />
     <Compile Include="Files\IFileService.cs" />
+    <Compile Include="Files\Paging.cs" />
     <Compile Include="IAuthenticatedService.cs" />
     <Compile Include="IMs\DirectMessageChannel.cs" />
     <Compile Include="IMs\DirectMessageChannelListResponse.cs" />
@@ -75,6 +79,7 @@
     <Compile Include="BaseApiService.cs" />
     <Compile Include="BaseAuthenticatedApiService.cs" />
     <Compile Include="Authorizations\IUserCredentialService.cs" />
+    <Compile Include="Reaction.cs" />
     <Compile Include="RealTime\IRealTimeMessagingService.cs" />
     <Compile Include="RealTime\RealTimeMessagingService.cs" />
     <Compile Include="RealTime\RealTimeMessagingStartResponse.cs" />
