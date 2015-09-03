@@ -61,6 +61,7 @@
     <Compile Include="Files\FileComment.cs" />
     <Compile Include="Files\File.cs" />
     <Compile Include="Files\FileInfoResponse.cs" />
+    <Compile Include="Files\FileListResponse.cs" />
     <Compile Include="Files\FileService.cs" />
     <Compile Include="Files\IFileService.cs" />
     <Compile Include="Files\Paging.cs" />

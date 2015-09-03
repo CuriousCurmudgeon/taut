@@ -155,6 +155,9 @@
     <Content Include="Files\Data\file_info.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Files\Data\file_list.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <None Include="packages.config" />
     <Content Include="Users\Data\users_list.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
