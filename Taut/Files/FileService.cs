@@ -10,6 +10,7 @@ namespace Taut.Files
     public class FileService : BaseAuthenticatedApiService, IFileService
     {
         private const string DELETE_METHOD = "files.delete";
+        private const string INFO_METHOD = "files.info";
 
         public FileService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
@@ -25,7 +26,16 @@ namespace Taut.Files
 
         public IObservable<FileInfoResponse> Info(string fileId, int? count = default(int?), int? page = default(int?))
         {
-            throw new NotImplementedException();
+            fileId.ThrowIfNull("fileId");
+
+            var queryParams = new Dictionary<string, object>
+            {
+                { "file", fileId },
+                { "count", count },
+                { "page", page },
+            };
+            return ObservableApiCall(INFO_METHOD, queryParams,
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<FileInfoResponse>(requestUrl, cancellationToken));
         }
     }
 }
