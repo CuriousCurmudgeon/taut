@@ -98,6 +98,7 @@
     <Compile Include="Chat\ChatServiceTests.cs" />
     <Compile Include="Emoji\EmojiServiceTests.cs" />
     <Compile Include="Files\FileServiceTests.cs" />
+    <Compile Include="Groups\GroupServiceTests.cs" />
     <Compile Include="IMs\DirectMessageChannelServiceTests.cs" />
     <Compile Include="JsonLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

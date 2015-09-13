@@ -66,6 +66,8 @@
     <Compile Include="Files\FileUploadResponse.cs" />
     <Compile Include="Files\IFileService.cs" />
     <Compile Include="Files\Paging.cs" />
+    <Compile Include="Groups\GroupService.cs" />
+    <Compile Include="Groups\IGroupService.cs" />
     <Compile Include="IAuthenticatedService.cs" />
     <Compile Include="IMs\DirectMessageChannel.cs" />
     <Compile Include="IMs\DirectMessageChannelListResponse.cs" />
