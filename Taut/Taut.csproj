@@ -63,6 +63,7 @@
     <Compile Include="Files\FileInfoResponse.cs" />
     <Compile Include="Files\FileListResponse.cs" />
     <Compile Include="Files\FileService.cs" />
+    <Compile Include="Files\FileUploadResponse.cs" />
     <Compile Include="Files\IFileService.cs" />
     <Compile Include="Files\Paging.cs" />
     <Compile Include="IAuthenticatedService.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,5 +26,9 @@ namespace Taut.Files
 
         IObservable<FileListResponse> List(string fileId, string userId = null, double? timestampFrom = null,
             double? timestampTo = null, FileTypes types = FileTypes.All, int? count = null, int? page = null);
+
+        // TODO: Implement file.uploads
+        //IObservable<FileUploadResponse> Upload(Stream file, string fileType = null, string filename = null,
+        //    string title = null, string initialComment = null, IEnumerable<string> channels = null);
     }
 }
