@@ -11,5 +11,7 @@ namespace Taut.Groups
         IObservable<BaseResponse> Archive(string channelId);
 
         IObservable<BaseResponse> Close(string channelId);
+
+        IObservable<GroupCreateResponse> Create(string name);
     }
 }

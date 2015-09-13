@@ -11,6 +11,7 @@ namespace Taut.Groups
     {
         private const string ARCHIVE_METHOD = "groups.archive";
         private const string CLOSE_METHOD = "groups.close";
+        private const string CREATE_METHOD = "groups.create";
 
         public GroupService(IUserCredentialService userCredentialService)
             : base(userCredentialService) { }
@@ -31,6 +32,15 @@ namespace Taut.Groups
             return ObservableApiCall(CLOSE_METHOD,
                     new { channel = channelId },
                     async (requestUrl, cancellationToken) => await GetResponseAsync<BaseResponse>(requestUrl, cancellationToken));
+        }
+
+        public IObservable<GroupCreateResponse> Create(string name)
+        {
+            name.ThrowIfNullOrEmpty("name");
+
+            return ObservableApiCall(CREATE_METHOD,
+                    new { name = name },
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<GroupCreateResponse>(requestUrl, cancellationToken));
         }
     }
 }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 using Taut.Messages;
 using Taut.Metadata;
 
-namespace Taut.Channels
+namespace Taut.Groups
 {
-    public class Channel
+    public class Group
     {
-        public Channel()
+        public Group()
         {
             Members = new List<string>();
         }
@@ -19,20 +19,20 @@ namespace Taut.Channels
         public string Id { get; set; }
 
         /// <summary>
-        /// Channel name without the leading #.
+        /// Group name without the leading #.
         /// </summary>
         public string Name { get; set; }
 
-        [JsonProperty("is_channel")]
-        public bool IsChannel { get; set; }
+        [JsonProperty("is_group")]
+        public bool IsGroup { get; set; }
 
         /// <summary>
-        /// Channel creation date as a Unix timestamp.
+        /// Group creation date as a Unix timestamp.
         /// </summary>
         public int Created { get; set; }
 
         /// <summary>
-        /// Id of the user who created the channel.
+        /// Id of the user who created the group.
         /// </summary>
         public string Creator { get; set; }
 
@@ -40,14 +40,7 @@ namespace Taut.Channels
         public bool IsArchived { get; set; }
 
         /// <summary>
-        /// Is this the "general" channel? This channel will include all
-        /// regular team members and commonly be called "#general".
-        /// </summary>
-        [JsonProperty("is_general")]
-        public bool IsGeneral { get; set; }
-
-        /// <summary>
-        /// Ids of users who are members of the channel.
+        /// Ids of users who are members of the group.
         /// </summary>
         public IEnumerable<string> Members { get; set; }
 
@@ -56,20 +49,14 @@ namespace Taut.Channels
         public TextMetadata Purpose { get; set; }
 
         /// <summary>
-        /// Is the user who requested the Channel a member of it?
-        /// </summary>
-        [JsonProperty("is_member")]
-        public bool IsMember { get; set; }
-
-        /// <summary>
         /// The Unix timestamp of the last message the user
-        /// who requested the channel has read.
+        /// who requested the group has read.
         /// </summary>
         [JsonProperty("last_read")]
         public double LastRead { get; set; }
 
         /// <summary>
-        /// The latest message in the channel.
+        /// The latest message in the group.
         /// </summary>
         public Message Latest { get; set; }
 

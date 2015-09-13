@@ -17,11 +17,13 @@ namespace Taut.Test.Channels
     public class GroupServiceTests : ApiServiceTestBase
     {
         private static BaseResponse OkBaseResponse;
+        private static GroupCreateResponse OkGroupCreateResponse;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
             OkBaseResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/base.json");
+            OkGroupCreateResponse = JsonLoader.LoadJson<GroupCreateResponse>(@"Groups/Data/group_create.json");
         }
 
         #region Archive
@@ -64,6 +66,48 @@ namespace Taut.Test.Channels
             await ShouldHaveCalledTestHelperAsync(OkBaseResponse,
                 async service => await service.Close("123").ToTask(),
                 "*groups.close*channel=123");
+        }
+
+        #endregion
+
+        #region Create
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenNameIsNull_ThenCreateThrowsArgumentNullException()
+        {
+            // Arrange
+            var service = BuildGroupService();
+
+            // Act
+            service.Create(null);
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenNameIsEmpty_ThenCreateThrowsArgumentException()
+        {
+            // Arrange
+            var service = BuildGroupService();
+
+            // Act
+            service.Create("");
+        }
+
+        [TestMethod, ExpectedException(typeof(ArgumentException))]
+        public void WhenNameIsWhitespace_ThenCreateThrowsArgumentException()
+        {
+            // Arrange
+            var service = BuildGroupService();
+
+            // Act
+            service.Create("   ");
+        }
+
+        [TestMethod]
+        public async Task WhenNameHasNonWhitespaceValue_ThenCreateIncludesNameInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkGroupCreateResponse,
+                async service => await service.Create("test").ToTask(),
+                "*groups.create*name=test");
         }
 
         #endregion
