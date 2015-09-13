@@ -250,6 +250,28 @@ namespace Taut.Test.Channels
 
         #endregion
 
+        #region Info
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenInfoThrowsException()
+        {
+            // Arrange
+            var service = BuildGroupService();
+
+            // Act
+            service.Info(null);
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenInfoIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkGroupResponse,
+                async service => await service.Info("123").ToTask(),
+                "*groups.info*channel=123");
+        }
+        
+        #endregion
+
         #region Test Helpers
 
         private GroupService BuildGroupService()
