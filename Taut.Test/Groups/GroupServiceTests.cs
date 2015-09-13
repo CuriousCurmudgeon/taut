@@ -46,6 +46,28 @@ namespace Taut.Test.Channels
 
         #endregion
 
+        #region Close
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenCloseThrowsException()
+        {
+            // Arrange
+            var service = BuildGroupService();
+
+            // Act
+            service.Close(null);
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenCloseIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkBaseResponse,
+                async service => await service.Close("123").ToTask(),
+                "*groups.close*channel=123");
+        }
+
+        #endregion
+
         #region Test Helpers
 
         private GroupService BuildGroupService()

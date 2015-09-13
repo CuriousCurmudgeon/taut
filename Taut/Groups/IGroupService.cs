@@ -9,5 +9,7 @@ namespace Taut.Groups
     public interface IGroupService
     {
         IObservable<BaseResponse> Archive(string channelId);
+
+        IObservable<BaseResponse> Close(string channelId);
     }
 }
