@@ -72,5 +72,11 @@ namespace Taut.Groups
         /// </summary>
         [JsonProperty("unread_count_display")]
         public int UnreadCountDisplay { get; set; }
+
+        /// <summary>
+        /// See https://api.slack.com/methods/groups.createChild for details on how child groups work.
+        /// </summary>
+        [JsonProperty("parent_group")]
+        public string ParentGroupId { get; set; }
     }
 }

@@ -12,6 +12,8 @@ namespace Taut.Groups
 
         IObservable<BaseResponse> Close(string channelId);
 
-        IObservable<GroupCreateResponse> Create(string name);
+        IObservable<GroupResponse> Create(string name);
+
+        IObservable<GroupResponse> CreateChild(string channelId);
     }
 }

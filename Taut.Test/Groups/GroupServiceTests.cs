@@ -17,13 +17,13 @@ namespace Taut.Test.Channels
     public class GroupServiceTests : ApiServiceTestBase
     {
         private static BaseResponse OkBaseResponse;
-        private static GroupCreateResponse OkGroupCreateResponse;
+        private static GroupResponse OkGroupResponse;
 
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
             OkBaseResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/base.json");
-            OkGroupCreateResponse = JsonLoader.LoadJson<GroupCreateResponse>(@"Groups/Data/group_create.json");
+            OkGroupResponse = JsonLoader.LoadJson<GroupResponse>(@"Groups/Data/group_create.json");
         }
 
         #region Archive
@@ -105,9 +105,31 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenNameHasNonWhitespaceValue_ThenCreateIncludesNameInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkGroupCreateResponse,
+            await ShouldHaveCalledTestHelperAsync(OkGroupResponse,
                 async service => await service.Create("test").ToTask(),
                 "*groups.create*name=test");
+        }
+
+        #endregion
+
+        #region CreateChild
+
+        [TestMethod, ExpectedException(typeof(ArgumentNullException))]
+        public void WhenChannelIdIsNull_ThenCreateChildThrowsException()
+        {
+            // Arrange
+            var service = BuildGroupService();
+
+            // Act
+            service.CreateChild(null);
+        }
+
+        [TestMethod]
+        public async Task WhenChannelIdHasValue_ThenCreateChildIncludesChannelIdInParams()
+        {
+            await ShouldHaveCalledTestHelperAsync(OkGroupResponse,
+                async service => await service.CreateChild("123").ToTask(),
+                "*groups.createChild*channel=123");
         }
 
         #endregion

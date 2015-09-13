@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Taut.Groups
 {
-    public class GroupCreateResponse : BaseResponse
+    public class GroupResponse : BaseResponse
     {
         public Group Group { get; set; }
     }
