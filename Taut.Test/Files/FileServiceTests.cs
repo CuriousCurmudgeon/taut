@@ -18,7 +18,7 @@ namespace Taut.Test.Files
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
-            OkBaseResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/base.json");
+            OkBaseResponse = JsonLoader.LoadJson<BaseResponse>(@"Data/base.json");
             OkFileInfoResponse = JsonLoader.LoadJson<FileInfoResponse>(@"Files/Data/file_info.json");
             OkFileListResponse = JsonLoader.LoadJson<FileListResponse>(@"Files/Data/file_list.json");
         }

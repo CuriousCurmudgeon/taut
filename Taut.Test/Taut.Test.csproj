@@ -126,7 +126,7 @@
     <Content Include="IMs\Data\im_list.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Channels\Data\base.json">
+    <Content Include="Data\base.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Channels\Data\channel_create.json">

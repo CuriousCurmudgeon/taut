@@ -23,7 +23,7 @@ namespace Taut.Test.Channels
         [ClassInitialize]
         public static void ClassInitialize(TestContext context)
         {
-            OkBaseResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/base.json");
+            OkBaseResponse = JsonLoader.LoadJson<BaseResponse>(@"Data/base.json");
             OkGroupResponse = JsonLoader.LoadJson<GroupResponse>(@"Groups/Data/group_create.json");
             OkMessagesResponse = JsonLoader.LoadJson<MessagesResponse>(@"Data/messages.json");
         }
