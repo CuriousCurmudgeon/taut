@@ -41,7 +41,7 @@
     <Compile Include="BaseResponse.cs" />
     <Compile Include="BoolExtensions.cs" />
     <Compile Include="Channels\Channel.cs" />
-    <Compile Include="Channels\ChannelHistoryResponse.cs" />
+    <Compile Include="MessagesResponse.cs" />
     <Compile Include="Channels\ChannelLeaveResponse.cs" />
     <Compile Include="Channels\ChannelSetTopicResponse.cs" />
     <Compile Include="Channels\ChannelSetPurposeResponse.cs" />

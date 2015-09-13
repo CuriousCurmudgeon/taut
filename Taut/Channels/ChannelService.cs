@@ -49,7 +49,7 @@ namespace Taut.Channels
                     async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelResponse>(requestUrl, cancellationToken));
         }
 
-        public IObservable<ChannelHistoryResponse> History(string channelId, double? latest = null,
+        public IObservable<MessagesResponse> History(string channelId, double? latest = null,
             double? oldest = null, bool? isInclusive = null, int? count = null)
         {
             channelId.ThrowIfNull("channelId");
@@ -64,7 +64,7 @@ namespace Taut.Channels
             };
 
             return ObservableApiCall(HISTORY_METHOD, queryParams,
-                    async (requestUrl, cancellationToken) => await GetResponseAsync<ChannelHistoryResponse>(requestUrl, cancellationToken));
+                    async (requestUrl, cancellationToken) => await GetResponseAsync<MessagesResponse>(requestUrl, cancellationToken));
         }
 
         public IObservable<ChannelResponse> Info(string channelId)

@@ -17,7 +17,7 @@ namespace Taut.Test.Channels
     {
         private static ChannelResponse OkChannelResponse;
         private static BaseResponse OkBaseResponse;
-        private static ChannelHistoryResponse OkChannelHistoryResponse;
+        private static MessagesResponse OkMessagesResponse;
         private static ChannelLeaveResponse OkChannelLeaveResponse;
         private static ChannelListResponse OkChannelListResponse;
         private static ChannelSetPurposeResponse OkChannelSetPurposeResponse;
@@ -28,7 +28,7 @@ namespace Taut.Test.Channels
         {
             OkChannelResponse = JsonLoader.LoadJson<ChannelResponse>(@"Channels/Data/channel_info.json");
             OkBaseResponse = JsonLoader.LoadJson<BaseResponse>(@"Channels/Data/base.json");
-            OkChannelHistoryResponse = JsonLoader.LoadJson<ChannelHistoryResponse>(@"Channels/Data/channel_history.json");
+            OkMessagesResponse = JsonLoader.LoadJson<MessagesResponse>(@"Data/messages.json");
             OkChannelLeaveResponse = JsonLoader.LoadJson<ChannelLeaveResponse>(@"Channels/Data/channel_leave.json");
             OkChannelListResponse = JsonLoader.LoadJson<ChannelListResponse>(@"Channels/Data/channel_list.json");
             OkChannelSetPurposeResponse = JsonLoader.LoadJson<ChannelSetPurposeResponse>(@"Channels/Data/channel_setPurpose.json");
@@ -116,7 +116,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenChannelIdHasValue_ThenHistoryIncludesChannelIdInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelHistoryResponse,
+            await ShouldHaveCalledTestHelperAsync(OkMessagesResponse,
                 async service => await service.History("123").ToTask(),
                 "*channels.history*channel=123");
         }
@@ -134,7 +134,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenLatestHasValue_ThenHistoryIncludesLatestInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelHistoryResponse,
+            await ShouldHaveCalledTestHelperAsync(OkMessagesResponse,
                 async service => await service.History("123", latest: 123.45).ToTask(),
                 "*channels.history*latest=123.45");
         }
@@ -152,7 +152,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenOldestHasValue_ThenHistoryIncludesOldestInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelHistoryResponse,
+            await ShouldHaveCalledTestHelperAsync(OkMessagesResponse,
                 async service => await service.History("123", oldest: 123.45).ToTask(),
                 "*channels.history*oldest=123.45");
         }
@@ -170,7 +170,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenIsInclusiveIsFalse_ThenHistoryIncludesInclusiveInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelHistoryResponse,
+            await ShouldHaveCalledTestHelperAsync(OkMessagesResponse,
                 async service => await service.History("123", isInclusive: false).ToTask(),
                 "*channels.history*inclusive=0");
         }
@@ -178,7 +178,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenIsInclusiveIsTrue_ThenHistoryIncludesInclusiveInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelHistoryResponse,
+            await ShouldHaveCalledTestHelperAsync(OkMessagesResponse,
                 async service => await service.History("123", isInclusive: true).ToTask(),
                 "*channels.history*inclusive=1");
         }
@@ -196,7 +196,7 @@ namespace Taut.Test.Channels
         [TestMethod]
         public async Task WhenCountHasValue_ThenHistoryIncludesCountInParams()
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelHistoryResponse,
+            await ShouldHaveCalledTestHelperAsync(OkMessagesResponse,
                 async service => await service.History("123", count: 50).ToTask(),
                 "*channels.history*count=50");
         }
@@ -638,7 +638,7 @@ namespace Taut.Test.Channels
 
         private async Task TestParamNotIncludedAsync(string paramName)
         {
-            await ShouldHaveCalledTestHelperAsync(OkChannelHistoryResponse,
+            await ShouldHaveCalledTestHelperAsync(OkMessagesResponse,
                 async service => await service.History("123").ToTask(),
                 "*channels.history*");
             GetApiCallPathAndQuery().ShouldNotContain(paramName);

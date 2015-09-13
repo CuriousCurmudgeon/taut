@@ -25,7 +25,7 @@ namespace Taut.Channels
         /// </summary>
         /// <exception cref="ArgumentNullException">Thrown if channelId is null</exception>
         /// <returns></returns>
-        IObservable<ChannelHistoryResponse> History(string channelId, double? latest = null,
+        IObservable<MessagesResponse> History(string channelId, double? latest = null,
             double? oldest = null, bool? isInclusive = null, int? count = null);
 
         /// <summary>

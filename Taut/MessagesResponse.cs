@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Taut.Messages;
 
-namespace Taut.Channels
+namespace Taut
 {
-    public class ChannelHistoryResponse : BaseResponse
+    public class MessagesResponse : BaseResponse
     {
-        public ChannelHistoryResponse()
+        public MessagesResponse()
         {
             Messages = new List<Message>();
         }

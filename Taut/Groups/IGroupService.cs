@@ -15,5 +15,8 @@ namespace Taut.Groups
         IObservable<GroupResponse> Create(string name);
 
         IObservable<GroupResponse> CreateChild(string channelId);
+
+        IObservable<MessagesResponse> History(string channelId, double? latest = null,
+            double? oldest = null, bool? isInclusive = null, int? count = null);
     }
 }
